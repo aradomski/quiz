@@ -2,12 +2,14 @@
 if [ -z '$1' ] ; then
 	echo "Podaj opis commitu";
 else
-	nazwa=\'$1\';
+	#Jakbym chciał cudzysłowia
+	#nazwa=\'$1\';
+	#echo $nazwa;
+
 	echo $1;
-	echo $nazwa;
 	echo "*************Adding to git*************";
-	git add . && git commit -m "$nazwa" && git push 
+	git add . && git commit -m "$1" && git push 
 	echo "*************Adding to mercurial*************";
-	hg add . && hg commit -m "$nazwa" && hg push
+	hg add . && hg commit -m "$1" && hg push
 fi
 
