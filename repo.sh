@@ -1,5 +1,5 @@
 #! /bin/bash
-if [ -z '$1' ] ; then
+if [ -z $1 ] ; then
 	echo "Podaj opis commitu";
 else
 	#Jakbym chciał cudzysłowia

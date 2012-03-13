@@ -119,3 +119,6 @@ data/.git/objects/f2/87d064a4b5ac275f53f645d15ac14d0ca3ed6a.i
 data/.git/objects/f4/af67b848efda43ee6953c410e0d5521ee8536d.i
 data/.git/objects/fe/2b0e247364601c1f88c1578d27ed1c8796fc68.i
 data/.hgignore.i
+data/style/images/fav.png.i
+data/style/images/notPass.png.i
+data/style/images/notPass.png.d

@@ -13,9 +13,15 @@
 		<title>You shall not pass!</title>
 	</head>
 	<body>
-		<?php
-			echo $path = $_SERVER['DOCUMENT_ROOT']; 
-		?>
+		<header>Naglowek:)</header>
+		<section>
+			<article id="login">
+			<?php
+				echo $path = $_SERVER['DOCUMENT_ROOT']; 
+			?>
+			</article>
+		</section>
+		<footer>Stopka</footer>
 	</body>
 </html>
 
