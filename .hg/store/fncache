@@ -122,3 +122,7 @@ data/.hgignore.i
 data/style/images/fav.png.i
 data/style/images/notPass.png.i
 data/style/images/notPass.png.d
+data/SMRozkmina.i
+data/klasy/Baza.php.i
+data/klasy/Logowanie.php.i
+data/redirect.php.i
