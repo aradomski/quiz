@@ -126,3 +126,5 @@ data/SMRozkmina.i
 data/klasy/Baza.php.i
 data/klasy/Logowanie.php.i
 data/redirect.php.i
+data/style/normalize.css.i
+data/style/styl.less.i
