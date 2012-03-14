@@ -1,0 +1,129 @@
+/*PAGE MARGIN PADDING*/
+@topMargin : 1em;
+@leftMargin : 3%;
+@rightMargin : 3%;
+@bottomMargin: 1em;
+@topPadding : 10px;
+@leftPadding : 4%;
+@rightPadding : 4%;
+@bottomPadding : 10px;
+/* BORDERS */
+@defaultBorderColor: black;
+@defaultBorderType: solid;
+@defaultBorderWidth: 2px;
+/*BORDERS RADIUS */
+@defaultradiusTR: 1em;
+@defaultradiusTL: 1em;
+@defaultradiusBR: 1em;
+@defaultradiusBL: 1em;
+
+@menuWidth: 250px;
+@contentHeigth: 600px;
+
+@anwserLetterWidth: 50px;
+@anwserMinPositionHeight: 50px;
+@anwserMaxPositionHeight: 200px;
+
+.leftBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-left: @width @type @borderColor;
+}
+.rightBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-right: @width @type @borderColor;
+}
+.topBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-top: @width @type @borderColor;
+}
+.bottomBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-bottom: @width @type @borderColor;
+}
+.bordered(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	.leftBorder(@borderColor, @type, @width);
+	.rightBorder(@borderColor, @type, @width);
+	.topBorder(@borderColor, @type, @width);
+	.bottomBorder(@borderColor, @type, @width);
+}
+
+
+.borderRadius(@radiusTR:  @defaultradiusTR, @radiusTL :@defaultradiusTL, @radiusBR : @defaultradiusBR, @radiusBL :@defaultradiusBL){
+	border-top-right-radius: @radiusTR;
+	border-top-left-radius: @radiusTL;
+	border-bottom-right-radius: @radiusBR;
+	border-bottom-left-radius: @radiusBL;
+}
+.borderShadow(@boxShadow1: 5px, @boxShadow2: 5px,@boxShadow3: 10px){
+	box-shadow: @boxShadow1 @boxShadow2 @boxShadow3;
+}
+
+body{
+	text-align:center;
+	padding-left: @leftMargin;
+	padding-right: @rightMargin;
+	padding-bottom: @bottomPadding;
+	padding-top: @topPadding;
+	margin-left: @leftMargin;
+	margin-right: @rightMargin;
+	margin-top:@topMargin;
+	margin-bottom: @bottomMargin;
+}
+
+header{
+	.borderRadius(1em, 1em, 0px, 0px);
+	.leftBorder();
+	.rightBorder();
+	.topBorder();
+	padding:20px;
+}
+#content{
+	.leftBorder();
+	.rightBorder();
+	height: @contentHeigth;
+}
+#leftMenu{
+	float:left;
+	width: @menuWidth;
+	height:100%;
+}
+#quiz{
+	height:100%;
+	margin:auto;
+	margin-left: @menuWidth;
+}
+
+#anwser{
+		list-style-type:none;
+		li{
+			.bordered(grey, dotted, 2px);
+			margin-bottom:2px;
+			margin-top:2px;
+			text-align:left;
+			min-height: @anwserMinPositionHeight;
+			max-height:@anwserMaxPositionHeight;
+			padding-top:1px;
+			padding-bottom:1px;
+			span{	
+				margin-left:@anwserLetterWidth;
+				height: 100%;
+				margin:0px;
+				margin-top:5px;
+				padding-top:1px;
+			}			
+		h1{
+			width:@anwserLetterWidth;
+			height: 100%;
+			float:left;
+			.rightBorder(grey, dotted, 2px);
+			.bottomBorder(grey, dotted, 2px);
+			margin:0px;
+			text-align:center;
+			padding-top:5px;
+			padding-bottom:0px;
+		}
+	}
+}
+
+footer{
+	.borderRadius(0px, 0px, 1em, 1em);
+	.leftBorder();
+	.rightBorder();
+	.bottomBorder();
+}
