@@ -1,3 +1,6 @@
+/*COLORS*/
+@mainColor: #EEEEEE;
+
 /*PAGE MARGIN PADDING*/
 @topMargin : 1em;
 @leftMargin : 3%;
@@ -20,9 +23,10 @@
 @menuWidth: 250px;
 @contentHeigth: 600px;
 
-@anwserLetterWidth: 50px;
-@anwserMinPositionHeight: 50px;
-@anwserMaxPositionHeight: 200px;
+@answerLetterWidth: 50px;
+@answerMinPositionHeight: 50px;
+@answerMaxPositionHeight: 200px;
+@answerBlockInnerSpace: 5px;
 
 .leftBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
 	border-left: @width @type @borderColor;
@@ -53,8 +57,20 @@
 .borderShadow(@boxShadow1: 5px, @boxShadow2: 5px,@boxShadow3: 10px){
 	box-shadow: @boxShadow1 @boxShadow2 @boxShadow3;
 }
+.liAnwserStyle(@bgColor: @mainColor){
+	background-color:@bgColor;
+	.bordered(grey, dotted, 2px);
+	margin-bottom:@answerBlockInnerSpace;
+	margin-top:@answerBlockInnerSpace;
+	text-align:left;
+	min-height: @answerMinPositionHeight;
+	padding-top:1px;
+	padding-bottom:1px;
+	padding-right:1em;
+}
 
 body{
+	background-color:@mainColor;
 	text-align:center;
 	padding-left: @leftMargin;
 	padding-right: @rightMargin;
@@ -87,38 +103,44 @@ header{
 	height:100%;
 	margin:auto;
 	margin-left: @menuWidth;
+	padding:1em;
 }
 
-#anwser{
-		list-style-type:none;
-		li{
-			.bordered(grey, dotted, 2px);
-			margin-bottom:2px;
-			margin-top:2px;
-			text-align:left;
-			min-height: @anwserMinPositionHeight;
-			max-height:@anwserMaxPositionHeight;
-			padding-top:1px;
-			padding-bottom:1px;
-			span{	
-				margin-left:@anwserLetterWidth;
-				height: 100%;
-				margin:0px;
-				margin-top:5px;
-				padding-top:1px;
-			}			
-		h1{
-			width:@anwserLetterWidth;
-			height: 100%;
-			float:left;
-			.rightBorder(grey, dotted, 2px);
-			.bottomBorder(grey, dotted, 2px);
-			margin:0px;
-			text-align:center;
-			padding-top:5px;
-			padding-bottom:0px;
-		}
+#answerBlock{
+	list-style-type:none;
+	.answer{
+		.liAnwserStyle();
 	}
+	.answer:hover{		
+		.liAnwserStyle(darken(@mainColor, 10%));
+	}
+	.answerChecked{
+		.liAnwserStyle(darken(@mainColor, 30%));
+	}
+}
+.answerSpan{	
+	margin-left:@answerLetterWidth;
+	height: 100%;
+	margin:0px;
+	margin-top:1em;
+	margin-bottom:2em;
+	margin-right:1em;
+	padding-top:10px;
+	line-height:10px;
+	padding-bottom:1px;
+}			
+.answerH1{
+	position:relative;
+	width:@answerLetterWidth;
+	height: 100%;
+	float:left;
+	.rightBorder(grey, dotted, 2px);
+	.bottomBorder(grey, dotted, 2px);
+	margin:0px;
+	margin-right:5px;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:0px;
 }
 
 footer{
