@@ -112,6 +112,9 @@ header {
 .radioAnwser {
   visibility: hidden;
 }
+.zegarek {
+  display: block;
+}
 footer {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;

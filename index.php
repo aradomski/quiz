@@ -17,9 +17,14 @@
 		<section id="content">
 			<article id="leftMenu">
 				<form id="login" method="post">
-				Login:<input type="text" name="userName" />
+					<section id="zegarek" class="zegarek">
+						Obecny czas: <em class="currentTime"></em><br />
+						Czas zakończenia: <em class="endTime"></em><br />
+						Pozostały czas:<em class="days"></em>:<em class="hours"></em>:<em class="min"></em>:<em class="sec"></em>
+					</section>
+				Login:<input type="text" name="userName" /><br />
 				Hasło:<input type="password" name="pass" />
-				<input type="submit" name="login" value="submit"/>
+				<input type="submit" name="login" value="Wyślij"/>
 				</form>
 			</article>
 			<form id="quiz" method="get">
@@ -34,7 +39,7 @@
 						<li id="answerD" class="answer"><input type="radio" name="anwser" value="D" class="radioAnwser" /><h1 class="answerH1">D</h1><span class="answerSpan">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit.</span></li>
 					</ul>
 				</section>
-				<input type="submit" name="question" value="submit" />
+				<input type="submit" name="question" value="Wyślij" />
 			</form>
 		</section>
 		<footer>
