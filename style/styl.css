@@ -109,6 +109,9 @@ header {
   padding-top: 5px;
   padding-bottom: 0px;
 }
+.radioAnwser {
+  visibility: hidden;
+}
 footer {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
