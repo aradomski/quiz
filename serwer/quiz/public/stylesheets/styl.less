@@ -1,0 +1,158 @@
+/*COLORS*/
+@mainColor: #EEEEEE;
+
+/*PAGE MARGIN PADDING*/
+@topMargin : 1em;
+@leftMargin : 3%;
+@rightMargin : 3%;
+@bottomMargin: 1em;
+@topPadding : 10px;
+@leftPadding : 4%;
+@rightPadding : 4%;
+@bottomPadding : 10px;
+/* BORDERS */
+@defaultBorderColor: black;
+@defaultBorderType: solid;
+@defaultBorderWidth: 2px;
+/*BORDERS RADIUS */
+@defaultradiusTR: 1em;
+@defaultradiusTL: 1em;
+@defaultradiusBR: 1em;
+@defaultradiusBL: 1em;
+
+@menuWidth: 250px;
+@contentHeigth: 600px;
+
+@answerLetterWidth: 50px;
+@answerMinPositionHeight: 50px;
+@answerMaxPositionHeight: 200px;
+@answerBlockInnerSpace: 5px;
+
+.leftBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-left: @width @type @borderColor;
+}
+.rightBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-right: @width @type @borderColor;
+}
+.topBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-top: @width @type @borderColor;
+}
+.bottomBorder(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	border-bottom: @width @type @borderColor;
+}
+.bordered(@borderColor : @defaultBorderColor, @type: @defaultBorderType, @width: @defaultBorderWidth){
+	.leftBorder(@borderColor, @type, @width);
+	.rightBorder(@borderColor, @type, @width);
+	.topBorder(@borderColor, @type, @width);
+	.bottomBorder(@borderColor, @type, @width);
+}
+
+
+.borderRadius(@radiusTR:  @defaultradiusTR, @radiusTL :@defaultradiusTL, @radiusBR : @defaultradiusBR, @radiusBL :@defaultradiusBL){
+	border-top-right-radius: @radiusTR;
+	border-top-left-radius: @radiusTL;
+	border-bottom-right-radius: @radiusBR;
+	border-bottom-left-radius: @radiusBL;
+}
+.borderShadow(@boxShadow1: 5px, @boxShadow2: 5px,@boxShadow3: 10px){
+	box-shadow: @boxShadow1 @boxShadow2 @boxShadow3;
+}
+.liAnwserStyle(@bgColor: @mainColor){
+	background-color:@bgColor;
+	.bordered(grey, dotted, 2px);
+	margin-bottom:@answerBlockInnerSpace;
+	margin-top:@answerBlockInnerSpace;
+	text-align:left;
+	min-height: @answerMinPositionHeight;
+	padding-top:1px;
+	padding-bottom:1px;
+	padding-right:1em;
+}
+
+body{
+	background-color:@mainColor;
+	text-align:center;
+	padding-left: @leftMargin;
+	padding-right: @rightMargin;
+	padding-bottom: @bottomPadding;
+	padding-top: @topPadding;
+	margin-left: @leftMargin;
+	margin-right: @rightMargin;
+	margin-top:@topMargin;
+	margin-bottom: @bottomMargin;
+}
+
+header{
+	.borderRadius(1em, 1em, 0px, 0px);
+	.leftBorder();
+	.rightBorder();
+	.topBorder();
+	padding:20px;
+}
+#content{
+	.leftBorder();
+	.rightBorder();
+	min-height: @contentHeigth;
+}
+#leftMenu{
+	float:left;
+	width: @menuWidth;
+	height:100%;
+}
+#quiz{
+	height:100%;
+	margin:auto;
+	margin-left: @menuWidth;
+	padding:1em;
+}
+
+#answerBlock{
+	list-style-type:none;
+	.answer{
+		.liAnwserStyle();
+	}
+	.answer:hover{		
+		.liAnwserStyle(darken(@mainColor, 10%));
+	}
+	.answerChecked{
+		.liAnwserStyle(darken(@mainColor, 30%));
+	}
+}
+.answerSpan{	
+	margin-left:@answerLetterWidth;
+	height: 100%;
+	margin:0px;
+	margin-top:1em;
+	margin-bottom:2em;
+	margin-right:1em;
+	padding-top:10px;
+	line-height:10px;
+	padding-bottom:1px;
+}			
+.answerH1{
+	position:relative;
+	width:@answerLetterWidth;
+	height: 100%;
+	float:left;
+	.rightBorder(grey, dotted, 2px);
+	.bottomBorder(grey, dotted, 2px);
+	margin:0px;
+	margin-right:5px;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:0px;
+}
+.radioAnswer{
+	visibility:hidden;
+}
+.zegarek{
+	display:block;
+	p{}
+}
+
+footer{
+	.borderRadius(0px, 0px, 1em, 1em);
+	.leftBorder();
+	.rightBorder();
+	.bottomBorder();
+}
