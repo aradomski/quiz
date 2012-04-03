@@ -28,6 +28,11 @@ exports.home = function(req, res){
 	if (typeof req.session.answer === undefined){
 		res.render('index', { title: 'Ninja Store', shortLoremIpsum: shortLI, longLoremIpsum: longLI});
 	} else {
-		res.render('index', { title: title, shortLoremIpsum: shortLI, longLoremIpsum: longLI})
+		res.render('index', { title: title, shortLoremIpsum: shortLI, longLoremIpsum: longLI});
 	}
 };
+exports.ajax_handler = function(req, res){
+	var param = req.params.param;
+	console.log("partial render");
+	res.render('partial',  {layout: false, param: param});
+}

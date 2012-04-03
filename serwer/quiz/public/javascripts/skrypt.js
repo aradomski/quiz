@@ -23,7 +23,7 @@ function dodajZero(liczba) {
 
 $(document).ready(function () {
     'use strict';
-    var futureDate = new Date("March 27, 2012 01:00:00 GMT+2"),
+    var futureDate = new Date("April 3, 2012 01:00:00 GMT+2"),
         futureTime = futureDate.getTime();
     setInterval(function () {
         var now = new Date(),
@@ -40,6 +40,27 @@ $(document).ready(function () {
     }, 1000);
 });
 
+
+$(document).on("click", "#klik" , function() {
+	 $.ajax({
+			type: "get",
+			dataType: "html",
+			context: document.html,
+			url: "/ajaxContent",
+			timeout: 2500,
+			cache: false,
+			success: function(html){
+					//location.hash = 'foo';
+					$('#newContent').html(html);
+				},
+			error: function(){
+					$('#newContent').text('error');
+				}
+			});
+	
+});
+
+/*
 $(document).on("mouseover", "#answerBlock li", function () {
     'use strict';
     $('#1').text($(this).attr('class'));
@@ -48,3 +69,4 @@ $(document).on("mouseout", "#answerBlock li", function () {
     'use strict';
     $('#1').text($(this).attr('class'));
 });
+*/
