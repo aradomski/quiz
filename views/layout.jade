@@ -1,0 +1,25 @@
+!!!5
+html(lang="pl")
+	head
+		include headers.jade
+	body!= body
+		header #{title}
+		section#content
+			article#leftMenu
+				include zegarek.jade
+				include logged.jade
+			section#question	
+				include quizForm.jade
+		footer Stopka
+			br
+			section#debug
+				p#1 
+				p#2
+				p#3
+				if (typeof answer === "undefined")
+					p#4 
+				else 
+					p#4 #{answer} 
+				p#5
+				button#klik Klik
+				div#newContent
