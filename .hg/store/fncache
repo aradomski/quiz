@@ -340,3 +340,8 @@ data/serwer/quiz/routes/index.js.i
 data/serwer/quiz/views/index.jade.i
 data/serwer/quiz/views/layout.jade.i
 data/serwer/serwer.js.i
+data/serwer/quiz/views/headers.jade.i
+data/serwer/quiz/views/logged.jade.i
+data/serwer/quiz/views/partial.jade.i
+data/serwer/quiz/views/quizForm.jade.i
+data/serwer/quiz/views/zegarek.jade.i
