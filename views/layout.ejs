@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+         <%- partial('headers') %>
+    </head>
+    <body>
+        <header><%= myParams.title %></header>
+        <section id="content">
+            <article id="leftMenu">
+				  <%- partial('zegarek') %>
+				  <%- partial('loginForm') %>
+				  <%- partial('register') %>
+			</article>
+            <section id="question">
+                <%- partial('quizForm') %>
+            </section>
+        </section>
+        <footer>
+			 <%- partial('footer') %>
+        </footer>
+    </body>
+
+</html>

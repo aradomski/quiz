@@ -1,0 +1,10 @@
+section#registerForm
+	if(typeof myParams !== "undefined" && typeof myParams.error !== "undefined") 
+			b Nie udało się zarejestrować
+			br
+	b Login:
+	input#userName(type='text', name='userName')
+	br
+	b Haslo:
+	input#pass(type='password', name='pass')
+	button#registerButton Zarejestruj
