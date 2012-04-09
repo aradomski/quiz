@@ -1,4 +1,3 @@
-
 /*
  * GET home page.
  */
@@ -7,32 +6,22 @@ var longLI = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viver
 var title = 'You shall not pass!';
 var shortLI = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit.';
 
+exports.home = function(req, res) {
+    res.render('index', {
+        myParams : {
+            title : title,
+            shortLoremIpsum : shortLI,
+            longLoremIpsum : longLI
+        }
+    })
+};
 /*
-exports.index = function(req, res){
-  res.render('index', { title: title, shortLoremIpsum: shortLI, longLoremIpsum: longLI})
-};
-*/
-
-// handler for form submitted from homepage
-exports.home_post_handler = function(req, res) {
-    // if the answer is not submitted, give it a default of "None"
-	answer = req.body.answer || 'None';
-    console.log(answer);
-    // store the answer as a session variable
-    req.session.answer = answer;
-    // redirect the user to homepage
-    res.redirect('/');
-};
-
-exports.home = function(req, res){
-	if (typeof req.session.answer === undefined){
-		res.render('index', { title: 'Ninja Store', shortLoremIpsum: shortLI, longLoremIpsum: longLI});
-	} else {
-		res.render('index', { title: title, shortLoremIpsum: shortLI, longLoremIpsum: longLI});
-	}
-};
-exports.ajax_handler = function(req, res){
-	var param = req.params.param;
-	console.log("partial render");
-	res.render('partial',  {layout: false, param: param});
-}
+ exports.ajax_handler = function(req, res){
+ var param = req.params.param;
+ console.log("partial render");
+ res.render('partial',  {layout: false, param: param});
+ }*/
+/*
+ exports.pageNotFoundHandler = function(req, res){
+ res.render('404', { title: 'File not Found', status:404 });
+ }*/

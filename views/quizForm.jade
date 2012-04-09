@@ -1,20 +1,20 @@
 form#quiz(method='post')
-	p #{longLoremIpsum}
+	p #{myParams.longLoremIpsum}
 	ul#answerBlock
 		li#answerA.answer
 			input(type='radio', name='answer', value='A', class='radioAnswer')
 			h1.answerH1 A
-			span.answerSpan #{shortLoremIpsum}
+			span.answerSpan #{myParams.shortLoremIpsum}
 		li#answerB.answer
 			input(type='radio', name='answer', value='B', class='radioAnswer')
 			h1.answerH1 B
-			span.answerSpan #{shortLoremIpsum}
+			span.answerSpan #{myParams.shortLoremIpsum}
 		li#answerC.answer
 			input(type='radio', name='answer', value='C', class='radioAnswer')
 			h1.answerH1 C
-			span.answerSpan #{longLoremIpsum}
+			span.answerSpan #{myParams.longLoremIpsum}
 		li#answerD.answer
 			input(type='radio', name='answer', value='D', class='radioAnswer')
 			h1.answerH1 D
-			span.answerSpan #{shortLoremIpsum}		
+			span.answerSpan #{myParams.shortLoremIpsum}		
 	input(type='submit', name='question', value='Wyślij')
