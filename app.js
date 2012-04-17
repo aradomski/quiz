@@ -39,43 +39,9 @@ var userProvider = new UserProvider();
 
 app.get('/', handlers.home);
 
-app.post('/login', function(req, res) {
-    userProvider.getUser(req.param('userName'), req.param('pass'), function(error, user) {
-        if(user) {
-            res.render('logged', {
-                layout : false,
-                myParams : {
-                    userName : user.userName
-                }
-            });
-        } else {
-            res.render('loginForm', {
-                layout : false,
-                myParams : {
-                    error : true
-                }
-            });
-        }
-    });
-});
+app.post('/login', handlers.login);
 
-app.post('/register', function(req, res) {
-    userProvider.save({
-        userName : req.param('userName'),
-        pass : req.param('pass')
-    }, function(error, user) {
-        if(user) {
-            res.send("Pomyślnie zarejestrowano użytkownika");
-        } else {
-            res.render('register', {
-                layout : false,
-                myParams : {
-                    error : true
-                }
-            })
-        }
-    });
-});
+app.post('/register', handlers.register);
 
 app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

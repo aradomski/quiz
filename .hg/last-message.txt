@@ -1,1 +1,1 @@
-logowanie i rejestracja
+przejscie na ejs zamiast jade

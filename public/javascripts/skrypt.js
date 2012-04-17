@@ -21,7 +21,7 @@ function dodajZero(liczba) {'use strict';
 
 
 $(document).ready(function() {
-    var futureDate = new Date("April 3, 2012 01:00:00 GMT+2"), futureTime = futureDate.getTime();
+    var futureDate = new Date("April 18, 2012 01:00:00 GMT+2"), futureTime = futureDate.getTime();
     setInterval(function() {
         var now = new Date(), timeLeft = Math.floor((futureTime - now.getTime()) / 1000);
         $(".sec").text(dodajZero(timeLeft % 60));

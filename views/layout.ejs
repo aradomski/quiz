@@ -5,11 +5,17 @@
          <%- partial('headers') %>
     </head>
     <body>
-        <header><%= myParams.title %></header>
+        <header><%= myParams.title %>
+        <img src="/images/notPass.png" alt="logo" width="15%" height="15%"/>
+        
+        
+        </header>
         <section id="content">
             <article id="leftMenu">
 				  <%- partial('zegarek') %>
+				  <section id="loginStatus">
 				  <%- partial('loginForm') %>
+				  </section>
 				  <%- partial('register') %>
 			</article>
             <section id="question">

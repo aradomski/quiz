@@ -1,8 +1,10 @@
-<section id="loginStatus">
+<% if(myParams.error === true) {%>
+Błąd logowania <br/>
+<% } %>
+
     <b>Login:</b>
     <input id="userName" type="text" name="userName">
     <br>
     <b>Haslo:</b>
     <input id="pass" type="password" name="pass">
     <button id="loginButton">Zaloguj</button>
-</section>
