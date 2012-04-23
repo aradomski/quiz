@@ -1,1 +1,1 @@
-przejscie na ejs zamiast jade
+poprawki drobne 

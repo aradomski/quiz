@@ -22,6 +22,10 @@ exports.home = function(req, res) {
 exports.login = function(req, res) {
     userProvider.getUser(req.param('userName'), req.param('pass'), function(error, user) {
         if(user) {
+
+            var userName = req.param('userName');
+            req.session.userName = userName;
+
             res.render('logged', {
                 layout : false,
                 myParams : {
@@ -56,6 +60,15 @@ exports.register = function(req, res) {
         }
     });
 };
+
+exports.maslo = function(req, res) {
+    if(req.session.userName) {
+        req.flash('bla', 'Your user name is: %s', req.session.userName);
+        res.send('bla' + req.session.userName);
+    } else {
+        res.send("nikt nie został zalogowany jeszcze");
+    }
+}
 /*
  exports.ajax_handler = function(req, res){
  var param = req.params.param;
