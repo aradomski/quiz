@@ -1,1 +1,1 @@
-poprawki drobne 
+SESJE./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh 
