@@ -22,10 +22,8 @@ exports.home = function(req, res) {
 exports.login = function(req, res) {
     userProvider.getUser(req.param('userName'), req.param('pass'), function(error, user) {
         if(user) {
-
             var userName = req.param('userName');
             req.session.userName = userName;
-
             res.render('logged', {
                 layout : false,
                 myParams : {
@@ -69,13 +67,3 @@ exports.maslo = function(req, res) {
         res.send("nikt nie został zalogowany jeszcze");
     }
 }
-/*
- exports.ajax_handler = function(req, res){
- var param = req.params.param;
- console.log("partial render");
- res.render('partial',  {layout: false, param: param});
- }*/
-/*
- exports.pageNotFoundHandler = function(req, res){
- res.render('404', { title: 'File not Found', status:404 });
- }*/

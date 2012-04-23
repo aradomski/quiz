@@ -29,9 +29,14 @@ app.configure(function() {
             collection : 'sessions'
         })
     }));
-
     app.use(app.router);
     app.use(express.static(__dirname + '/public'));
+});
+
+app.dynamicHelpers({
+    session : function(req, res) {
+        return req.session;
+    }
 });
 
 app.configure('development', function() {
