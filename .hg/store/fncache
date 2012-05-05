@@ -1054,3 +1054,15 @@ data/node_modules/connect/node_modules/qs/test/mocha.opts.i
 data/node_modules/connect/node_modules/qs/test/parse.js.i
 data/node_modules/connect/node_modules/qs/test/stringify.js.i
 data/node_modules/connect/package.json.i
+data/public/images/emptyfield.jpg.i
+data/public/images/emptyinput.jpg.i
+data/public/images/failure.jpg.i
+data/public/images/help.gif.i
+data/public/images/important.gif.i
+data/public/images/info.gif.i
+data/public/images/title.gif.i
+data/public/images/usererror.jpg.i
+data/public/images/usernametaken.jpg.i
+data/public/images/usernotfound.jpg.i
+data/public/javascripts/jquery.alerts.js.i
+data/public/stylesheets/jquery.alerts.css.i

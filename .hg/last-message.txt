@@ -1,1 +1,1 @@
-zmienne sesyjne dostępne w layoucie
+walidacja użytkowników komunikaty formularze
