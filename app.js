@@ -61,17 +61,19 @@ app.post('/login', handlers.login);
 
 app.post('/register', handlers.register);
 
-app.get('/maslo', handlers.maslo);
+app.post('/answer', handlers.answer);
+/*
+ app.get('/maslo', handlers.maslo);
 
-app.get('/bla', function(req, res) {
-    var body = '';
-    if(req.session.views) {++req.session.views;
-    } else {
-        req.session.views = 1;
-        body += '<p>First time visiting? view this page in several browsers :)</p>';
-    }
-    res.send(body + '<p>viewed <strong>' + req.session.views + '</strong> times.</p>');
-});
-
+ app.get('/bla', function(req, res) {
+ var body = '';
+ if(req.session.views) {++req.session.views;
+ } else {
+ req.session.views = 1;
+ body += '<p>First time visiting? view this page in several browsers :)</p>';
+ }
+ res.send(body + '<p>viewed <strong>' + req.session.views + '</strong> times.</p>');
+ });
+ */
 app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

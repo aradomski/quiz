@@ -1,10 +1,20 @@
-<% if(myParams.error === true) {%>
-Błąd logowania <br/>
-<% } %>
-
+<% if(session.userName !== undefined) {%>
+	<section id="loginStatus">
+		Witaj <%= session.userName %> !
+	</section>
+<% }else{ %>
+	<% if(myParams.error === true) {%>
+		Nie ma takiego użytkownika. <br/>
+	<% } %>
     <b>Login:</b>
-    <input id="userName" type="text" name="userName">
-    <br>
-    <b>Haslo:</b>
-    <input id="pass" type="password" name="pass">
-    <button id="loginButton">Zaloguj</button>
+    <form>
+    	<input id="loginUserName" type="text" name="userName">
+    	<br>
+   		<b>Haslo:</b>
+    	<input id="loginPass" type="password" name="pass">
+    	<button id="loginButton">Zaloguj</button>
+    </form>
+	<% if(myParams.error === true) {%>
+		<img src="/images/usernotfound.jpg" width="221" height="166" alt="user not found" />
+	<% } %>
+<% } %>

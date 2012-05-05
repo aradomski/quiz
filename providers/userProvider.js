@@ -1,8 +1,4 @@
-var Db = require('mongodb').Db,
- Connection = require('mongodb').Connection, 
- Server = require('mongodb').Server, 
- BSON = require('mongodb').BSON, 
- ObjectID = require('mongodb').ObjectID;
+var Db = require('mongodb').Db, Connection = require('mongodb').Connection, Server = require('mongodb').Server, BSON = require('mongodb').BSON, ObjectID = require('mongodb').ObjectID;
 UserProvider = function() {
     var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
     var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : Connection.DEFAULT_PORT;
@@ -36,13 +32,33 @@ UserProvider.prototype.getUser = function(userName, pass, callback) {
                 if(error) {
                     callback(error);
                 } else {
-                    console.log(result);
+                    console.log("Loguje użytkownika " + result);
                     callback(null, result)
                 }
             });
         }
     });
 };
+// sprawdzanie czy login juz istnieje
+UserProvider.prototype.findLogin = function(userName, callback) {
+    this.getCollection(function(error, user_collection) {
+        if(error)
+            callback(error)
+        else {
+            // operacje na kolekcji zwróconej z getCollection
+            user_collection.findOne({
+                userName : userName,
+            }, function(error, result) {
+                if(error) {
+                    callback(error);
+                } else {
+                    console.log("szukam loginu " + result);
+                    callback(null, result)
+                }
+            });
+        }
+    });
+}
 // dodawanie do bazy, argument to obiekt i funkcja
 UserProvider.prototype.save = function(users, callback) {
     this.getCollection(function(error, user_collection) {

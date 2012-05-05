@@ -24,10 +24,11 @@ exports.login = function(req, res) {
         if(user) {
             var userName = req.param('userName');
             req.session.userName = userName;
-            res.render('logged', {
+            res.render('loginForm', {
                 layout : false,
                 myParams : {
-                    userName : user.userName
+                    userName : user.userName,
+                    error : false
                 }
             });
         } else {
@@ -42,28 +43,51 @@ exports.login = function(req, res) {
 };
 
 exports.register = function(req, res) {
-    userProvider.save({
-        userName : req.param('userName'),
-        pass : req.param('pass')
-    }, function(error, user) {
-        if(user) {
-            res.send("Pomyślnie zarejestrowano użytkownika");
+    var userName = req.param('userName'), pass = req.param('pass');
+    console.log(userName);
+    userProvider.findLogin(userName, function(error, userExist) {
+        if(!userExist) {
+            userProvider.save({
+                userName : userName,
+                pass : pass
+            }, function(error, user) {
+                if(user) {
+                    res.send("Pomyślnie zarejestrowano użytkownika");
+                } else {
+                    res.render('register', {
+                        layout : false,
+                        myParams : {
+                            error : true
+                        }
+                    });
+                }
+            });
         } else {
             res.render('register', {
                 layout : false,
                 myParams : {
-                    error : true
+                    exist : true
                 }
             });
         }
+        console.log(error);
     });
 };
 
-exports.maslo = function(req, res) {
+exports.answer = function(req, res) {
     if(req.session.userName) {
-        req.flash('bla', 'Your user name is: %s', req.session.userName);
-        res.send('bla' + req.session.userName);
+        var anwser = req.param("answer"), userName = req.session.userName;
+        res.send("Użytkownik: " + userName + " odpowiedział: " + anwser);
     } else {
         res.send("nikt nie został zalogowany jeszcze");
     }
-}
+};
+/*
+ exports.maslo = function(req, res) {
+ if(req.session.userName) {
+ req.flash('bla', 'Your user name is: %s', req.session.userName);
+ res.send('bla' + req.session.userName);
+ } else {
+ res.send("nikt nie został zalogowany jeszcze");
+ }
+ }*/

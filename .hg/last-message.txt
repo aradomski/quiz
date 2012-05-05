@@ -1,1 +1,1 @@
-SESJE./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh ./repo.sh 
+zmienne sesyjne dostępne w layoucie

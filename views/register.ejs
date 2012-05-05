@@ -2,11 +2,19 @@
 	Błąd rejestracji<br/>
 <% } %>
 
-<section id="registerForm">
+<form id="registerForm">
     <b>Login:</b>
-    <input id="userName" type="text" name="userName">
+    <input id="registerUserName" type="text" name="userName" size="15">
     <br>
     <b>Haslo:</b>
-    <input id="pass" type="password" name="pass">
+    <input id="pass" type="password" name="pass" size="15">
+    <b>Powtórz:</b>
+    <input id="pass2" type="password" name="pass2" size="15">
     <button id="registerButton">Zarejestruj</button>
-</section>
+</form>
+<% if(myParams.exist === true) {%>
+	<img src="/images/usernametaken.jpg" width="221" height="166" alt="username taken" />
+<% } %>
+<% if(myParams.error === true) {%>
+	<img src="/images/usererror.jpg" width="221" height="166" alt="user error" />
+<% } %>
