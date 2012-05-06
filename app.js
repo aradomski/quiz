@@ -62,6 +62,15 @@ app.post('/login', handlers.login);
 app.post('/register', handlers.register);
 
 app.post('/answer', handlers.answer);
+
+app.post('/admin', handlers.admin);
+
+app.post('/users', handlers.users);
+
+app.post('/questions', handlers.questions);
+
+app.post('/addQuestion', handlers.addQuestion);
+
 /*
  app.get('/maslo', handlers.maslo);
 

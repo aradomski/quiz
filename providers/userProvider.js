@@ -1,3 +1,5 @@
+/*globals UserProvider : true, process : true , console: false*/
+
 var Db = require('mongodb').Db, Connection = require('mongodb').Connection, Server = require('mongodb').Server, BSON = require('mongodb').BSON, ObjectID = require('mongodb').ObjectID;
 UserProvider = function() {
     var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
@@ -12,18 +14,19 @@ UserProvider = function() {
 // zwrócenie kolekcji userów z bazy
 UserProvider.prototype.getCollection = function(callback) {
     this.db.collection('Users', function(error, users_collection) {
-        if(error)
+        if(error) {
             callback(error);
-        else
+        } else {
             callback(null, users_collection);
+        }
     });
 };
 // zwracanie jednego użytkownika
 UserProvider.prototype.getUser = function(userName, pass, callback) {
     this.getCollection(function(error, user_collection) {
-        if(error)
-            callback(error)
-        else {
+        if(error) {
+            callback(error);
+        } else {
             // operacje na kolekcji zwróconej z getCollection
             user_collection.findOne({
                 userName : userName,
@@ -33,7 +36,23 @@ UserProvider.prototype.getUser = function(userName, pass, callback) {
                     callback(error);
                 } else {
                     console.log("Loguje użytkownika " + result);
-                    callback(null, result)
+                    callback(null, result);
+                }
+            });
+        }
+    });
+};
+//zwracanie wszystkich userów
+UserProvider.prototype.getAllUsers = function(callback) {
+    this.getCollection(function(error, users_collection) {
+        if(error) {
+            callback(error);
+        } else {
+            users_collection.find().toArray(function(error, results) {
+                if(error) {
+                    callback(error);
+                } else {
+                    callback(null, results);
                 }
             });
         }
@@ -42,27 +61,27 @@ UserProvider.prototype.getUser = function(userName, pass, callback) {
 // sprawdzanie czy login juz istnieje
 UserProvider.prototype.findLogin = function(userName, callback) {
     this.getCollection(function(error, user_collection) {
-        if(error)
-            callback(error)
-        else {
+        if(error) {
+            callback(error);
+        } else {
             // operacje na kolekcji zwróconej z getCollection
             user_collection.findOne({
-                userName : userName,
+                userName : userName
             }, function(error, result) {
                 if(error) {
                     callback(error);
                 } else {
                     console.log("szukam loginu " + result);
-                    callback(null, result)
+                    callback(null, result);
                 }
             });
         }
     });
-}
+};
 // dodawanie do bazy, argument to obiekt i funkcja
 UserProvider.prototype.save = function(users, callback) {
     this.getCollection(function(error, user_collection) {
-        var i = 0;
+        var i = 0, user;
         if(error) {
             callback(error);
         } else {

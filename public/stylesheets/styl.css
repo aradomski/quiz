@@ -32,10 +32,13 @@ header {
 #leftMenu {
   float: left;
   width: 250px;
-  height: 100%;
+  min-height: 300px;
+  max-height: 700px;
 }
 #quiz {
-  height: 100%;
+  min-height: 300px;
+  max-height: 1100px;
+  overflow-y: auto;
   margin: auto;
   margin-left: 250px;
   padding: 1em;
