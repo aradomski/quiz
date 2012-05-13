@@ -1106,3 +1106,6 @@ data/views/admin/adminIndex.ejs.i
 data/views/admin/questionManager.ejs.i
 data/views/admin/register.ejs.i
 data/views/admin/userManager.ejs.i
+data/routes/admin.js.i
+data/views/admin/questionsTable.ejs.i
+data/views/admin/usersTable.ejs.i
