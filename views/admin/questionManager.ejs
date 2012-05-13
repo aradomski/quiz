@@ -1,63 +1,20 @@
-<% if(session.userName==="Adam" ) {%>
+ <% if(session.userName==="Adam" ) {%>
     <script type="text/javascript" src="/javascripts/admin/questionManagerStart.js"></script>
     <link rel="stylesheet" href="/stylesheets/tableSort/jquery.dataTables.css">
     <% } %>
-        <div id="questionTabs">
+    <div id="questionTabs">
             <ul>
                 <li>
-                    <a href="#listQuestion">List questions</a>
+                    <a href="/questionsTable">List questions</a>
                 </li>
                 <li>
-                    <a href="#addQuestion">Add question</a>
+                    <a href="/addQuestion">Add question</a>
                 </li>
             </ul>
             <div id="listQuestion">
-                <table id="questionList">
-                    <thead>
-                        <tr>
-                            <th>Question</th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>D</th>
-                            <th>Correct anwser</th>
-                            <th>Created at</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% myParams.questions.forEach(function(question) { %>
-                            <tr>
-                                <td>
-                                    <%=question.question %>
-                                </td>
-                                <td>
-                                    <%=question.a %>
-                                </td>
-                                <td>
-                                    <%=question.b %>
-                                </td>
-                                <td>
-                                    <%=question.c %>
-                                </td>
-                                <td>
-                                    <%=question.d %>
-                                </td>
-                                <td>
-                                    <%=question.correct %>
-                                </td>
-                                <td>
-                                    <%=question.created_at %>
-                                </td>
-                                <td>
-                                    <button class="edit" value="<%= question._id %>">Edytuj</button>
-                                </td>
-                            </tr>
-                            <% }) %>
-                    </tbody>
-                </table>
+            
             </div>
             <div id="addQuestion">
-				   <%- partial( 'addQuestion') %>
+				 
 			</div>
         </div>

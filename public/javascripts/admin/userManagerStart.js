@@ -2,13 +2,12 @@
 /*globals $: false, jConfirm: false, jAlert: false , dataTable: false */
 
 $(function() {
-    $("#userTabs").tabs();
-});
-
-$(document).ready(function() {
-    $('#userList').dataTable({
-        "aaSorting" : [[0, "asc"]]
-        // ,"bStateSave" : true
+    $("#userTabs").tabs({
+        ajaxOptions : {
+            error : function(xhr, status, index, anchor) {
+                $(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible. " + "If this wouldn't be a demo.");
+            }
+        }
     });
 });
 /*Rejestracja*/
@@ -19,11 +18,10 @@ $(document).on("click", "#registerButton", function(e) {
     //alert(userName);
     if(pass !== "" && pass2 !== "" && pass === pass2 && userName !== "") {
         $.ajax({
-            type : "post",
+            type : "get",
             dataType : "html",
             context : document.html,
-            url : "/register/",
-            data : "userName=" + userName + "&pass=" + pass,
+            url : "/register?" + "userName=" + userName + "&pass=" + pass,
             timeout : 2500,
             cache : false,
             success : function(html) {

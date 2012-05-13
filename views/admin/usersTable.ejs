@@ -1,0 +1,29 @@
+<% if(session.userName==="Adam" ) {%>
+    <script>$(document).ready(function() {
+    $('#userList').dataTable({
+        "aaSorting" : [[0, "asc"]],
+       
+        "bScrollCollapse" : false,
+        "sScrollY" : "700px",
+        "bPaginate" : true,
+        "bProcessing" : true,
+        "sAjaxSource" : '/usersJSON'
+        // ,"bStateSave" : true
+   		 });
+	});
+</script>
+    <link rel="stylesheet" href="/stylesheets/tableSort/jquery.dataTables.css">
+    <% } %>
+ <table id="userList">
+                    <thead>
+                        <tr>
+                            <th>User name</th>
+                            <th>Created at</th>
+                            <th>Password</th>
+                            <th>edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                   
+                    </tbody>
+                </table>

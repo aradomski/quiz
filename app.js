@@ -1,13 +1,16 @@
 /*jslint node: true */
+/*global module: false */
 /**
  * Module dependencies.
  */
 
-var express = require('express'), handlers = require('./routes'), UserProvider = require('./providers/userProvider').UserProvider;
+var express = require('express'), handlers = require('./routes'), UserProvider = require('./providers/userProvider').UserProvider, adminHandlers = require('./routes/admin.js');
 
 var mongoStore = require('connect-mongo')(express), mongo = require('mongoose');
 
-var app = module.exports = express.createServer();
+var io = require('socket.io');
+
+var app = module.exports = express.createServer(), io = io.listen(app);
 
 // Configuration
 
@@ -59,17 +62,25 @@ app.get('/', handlers.home);
 
 app.post('/login', handlers.login);
 
-app.post('/register', handlers.register);
-
 app.post('/answer', handlers.answer);
 
-app.post('/admin', handlers.admin);
+app.post('/admin', adminHandlers.admin);
 
-app.post('/users', handlers.users);
+app.post('/users', adminHandlers.users);
 
-app.post('/questions', handlers.questions);
+app.get('/usersTable', adminHandlers.usersTable);
 
-app.post('/addQuestion', handlers.addQuestion);
+app.get('/usersJSON', adminHandlers.usersJSON);
+
+app.get('/register', adminHandlers.register);
+
+app.post('/questions', adminHandlers.questions);
+
+app.get('/questionsTable', adminHandlers.questionsTable);
+
+app.get('/questionsJSON', adminHandlers.questionsJSON);
+
+app.get('/addQuestion', adminHandlers.addQuestion);
 
 /*
  app.get('/maslo', handlers.maslo);

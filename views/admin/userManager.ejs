@@ -5,43 +5,16 @@
         <div id="userTabs">
             <ul>
                 <li>
-                    <a href="#listUser">List users</a>
+                    <a href="/usersTable">List users</a>
                 </li>
                 <li>
-                    <a href="#addUser">Add user</a>
+                    <a href="/register">Add user</a>
                 </li>
             </ul>
             <div id="listUser">
-                <table id="userList">
-                    <thead>
-                        <tr>
-                            <th>User name</th>
-                            <th>Created at</th>
-                            <th>Password</th>
-                            <th>edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% myParams.users.forEach(function(user) { %>
-                            <tr>
-                                <td>
-                                    <%=user.userName %>
-                                </td>
-                                <td>
-                                    <%=user.created_at %>
-                                </td>
-                                <td>
-                                    <%=user.pass%>
-                                </td>
-                                <td>
-                                    <button class="edit" value="<%= user._id %>">Edytuj</button>
-                                </td>
-                            </tr>
-                            <% }) %>
-                    </tbody>
-                </table>
+              
             </div>
             <div id="addUser">
-                <%- partial( 'register') %>
+           
             </div>
         </div>

@@ -1,1 +1,1 @@
-walidacja użytkowników komunikaty formularze
+panel admina

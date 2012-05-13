@@ -38,6 +38,7 @@ header {
 #quiz {
   min-height: 300px;
   max-height: 1100px;
+  width: 1100px;
   overflow-y: auto;
   margin: auto;
   margin-left: 250px;

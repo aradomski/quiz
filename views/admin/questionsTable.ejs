@@ -1,0 +1,34 @@
+<% if(session.userName==="Adam" ) {%>
+    <script>$(document).ready(function() {
+    $('#questionList').dataTable({
+        "aaSorting" : [[0, "asc"]],
+        "sScrollX" : "100%",
+        "sScrollXInner" : "110%",
+        "bScrollCollapse" : false,
+        "sScrollY" : "700px",
+        "bPaginate" : true,
+        "bProcessing" : true,
+        "sAjaxSource" : '/questionsJSON'
+        // ,"bStateSave" : true
+   		 });
+	});
+</script>
+    <link rel="stylesheet" href="/stylesheets/tableSort/jquery.dataTables.css">
+    <% } %>
+ <table id="questionList">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>D</th>
+                            <th>Correct anwser</th>
+                            <th>Created at</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      
+                    </tbody>
+                </table>
