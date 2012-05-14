@@ -10,15 +10,13 @@ $(function() {
         }
     });
 });
-
 //Dodawanie pytania
 $(document).on("click", "#addQuestionButton", function(e) {
-    var question = $("#questionForm input[name='question']").val(), a = $("#questionForm input[name='a']").val(), b = $("#questionForm input[name='b']").val(), c = $("#questionForm input[name='c']").val(), d = $("#questionForm input[name='d']").val(), correct = $("#questionForm input[name='correct']").val(), empty = 0;
+    var question = $("#questionForm input[name='question']").val(), a = $("#questionForm input[name='a']").val(), b = $("#questionForm input[name='b']").val(), c = $("#questionForm input[name='c']").val(), d = $("#questionForm input[name='d']").val(), correct = $("#questionForm input[name='correct']").val();
     // alert(question);
     if(question === "" || a === "" || b === "" || c === "" || d === "" || correct === "") {
-        empty += 1;
+        jAlert('<img src="images/emptyfield.jpg" width="500" height="310" alt="Empty field"/><br> Brak hasła.', 'U r doing it wrong!');
     } else {
-
         e.preventDefault();
         $.ajax({
             type : "get",
