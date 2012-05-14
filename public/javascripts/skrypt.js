@@ -106,7 +106,21 @@ $(document).on("click", "#loginButton", function(e) {
 /*COMETY*/
 
 var socket = io.connect(window.location);
-socket.on('question', function(need) {
-    alert(need);
-    $("#1").html(need);
+socket.on('question', function(questionID) {
+    $.ajax({
+        type : "get",
+        dataType : "html",
+        context : document.html,
+        url : "/getQuestionById?questionId=" + questionID,
+        timeout : 2500,
+        cache : false,
+        success : function(html) {
+            //location.hash = 'foo';
+            $('#quiz').html(html);
+        },
+        error : function() {
+            //    $('#loginStatus').text('error');
+            jAlert('<img src="images/failure.jpg" width="500" height="375" alt="Ajax login error"/>', 'Division by zero error!');
+        }
+    });
 });
