@@ -1,5 +1,5 @@
 /*jslint node: true */
-/*global module: false */
+/*global module: false, __dirname: false, console: false */
 /**
  * Module dependencies.
  */
@@ -8,7 +8,7 @@ var express = require('express'), handlers = require('./routes'), UserProvider =
 
 var mongoStore = require('connect-mongo')(express), mongo = require('mongoose');
 
-var io = require('socket.io');
+var io = require('socket.io'), fs = require('fs');
 
 var app = module.exports = express.createServer(), io = io.listen(app);
 
@@ -82,18 +82,5 @@ app.get('/questionsJSON', adminHandlers.questionsJSON);
 
 app.get('/addQuestion', adminHandlers.addQuestion);
 
-/*
- app.get('/maslo', handlers.maslo);
-
- app.get('/bla', function(req, res) {
- var body = '';
- if(req.session.views) {++req.session.views;
- } else {
- req.session.views = 1;
- body += '<p>First time visiting? view this page in several browsers :)</p>';
- }
- res.send(body + '<p>viewed <strong>' + req.session.views + '</strong> times.</p>');
- });
- */
 app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
