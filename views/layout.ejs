@@ -2,27 +2,27 @@
 <html lang="pl">
     
     <head>
-        <%- partial( 'headers') %>
+        <%- partial('headers') %>
     </head>
     
     <body>
         <header>
-            <%=m yParams.title %>
+            <%=myParams.title %>
                 <img src="/images/notPass.png" alt="logo" width="150" height="150" />
         </header>
         <section id="content">
             <article id="leftMenu">
-                <%- partial( 'zegarek') %>
+                <%- partial('zegarek') %>
                     <section id="loginStatus">
-                        <%- partial( 'loginForm') %>
+                        <%- partial('loginForm') %>
                     </section>
             </article>
             <section id="question">
-                <%- partial( 'quizForm') %>
+                <%- partial('quizForm') %>
             </section>
         </section>
         <footer>
-            <%- partial( 'footer') %>
+            <%- partial('footer') %>
         </footer>
     </body>
 </html>

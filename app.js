@@ -8,7 +8,7 @@ var express = require('express'), handlers = require('./routes'), UserProvider =
 
 var mongoStore = require('connect-mongo')(express), mongo = require('mongoose');
 
-var io = require('socket.io');
+var io = require('socket.io'), fs = require('fs');
 
 var app = module.exports = express.createServer(), io = io.listen(app);
 
