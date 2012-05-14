@@ -1,3 +1,4 @@
+/*globals QuestionProvider: true, console : false*/
 var Db = require('mongodb').Db, Connection = require('mongodb').Connection, Server = require('mongodb').Server, BSON = require('mongodb').BSON, ObjectID = require('mongodb').ObjectID;
 QuestionProvider = function() {
     var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
@@ -12,27 +13,31 @@ QuestionProvider = function() {
 // zwrócenie kolekcji pytan z bazy
 QuestionProvider.prototype.getCollection = function(callback) {
     this.db.collection('Questions', function(error, questions_collection) {
-        if(error)
+        if(error) {
             callback(error);
-        else
+        } else {
             callback(null, questions_collection);
+        }
     });
 };
 // zwracanie jednego pytania
-QuestionProvider.prototype.getQuestion = function(userName, pass, callback) {
+QuestionProvider.prototype.getQuestion = function(id, callback) {
     this.getCollection(function(error, question_collection) {
-        if(error)
-            callback(error)
-        else {
+        var string = 'ObjectId("' + id + '")';
+        // var string = id;
+        console.log(string);
+        if(error) {
+            callback(error);
+        } else {
             // operacje na kolekcji zwróconej z getCollection
             question_collection.findOne({
-                _id : _id
+                "_id" : new ObjectID(id)
             }, function(error, result) {
                 if(error) {
                     callback(error);
                 } else {
-                    console.log("Znajduje pytanie " + result);
-                    callback(null, result)
+                    console.log("Znajduje pytanie o id: " + string + " o tresci: " + result.question);
+                    callback(null, result);
                 }
             });
         }
@@ -57,7 +62,7 @@ QuestionProvider.prototype.getAllQuestions = function(callback) {
 // dodawanie do bazy, argument to obiekt i funkcja
 QuestionProvider.prototype.save = function(questions, callback) {
     this.getCollection(function(error, question_collection) {
-        var i = 0;
+        var i = 0, question;
         if(error) {
             callback(error);
         } else {

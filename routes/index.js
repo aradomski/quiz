@@ -11,13 +11,16 @@ var questionProvider = new QuestionProvider();
 var longLI = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra, nunc ac lacinia varius, nisl elit vehicula nisl, a aliquet quam ante eleifend magna. Etiam pretium, enim non cursus auctor, lacus felis ornare nulla, sit amet mattis neque neque a urna. Ut et quam lacinia diam vestibulum laoreet. Nunc vel lacus sit amet mi molestie ultrices. Fusce sollicitudin tempus dui sit amet sodales. Mauris condimentum commodo ipsum, lacinia consectetur turpis rhoncus suscipit. Sed mattis lacinia magna, et pulvinar urna bibendum eget.';
 var title = 'You shall not pass!';
 var shortLI = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit.';
+var welcomeText = 'Nie zdacie, nie macie żadnych szans. Najlepiej już odkładajcie na warunki';
 
 exports.home = function(req, res) {
     res.render('index', {
         myParams : {
             title : title,
             shortLoremIpsum : shortLI,
-            longLoremIpsum : longLI
+            longLoremIpsum : longLI,
+            displayQuestion : false,
+            welcomeText : welcomeText
         }
     });
 };
@@ -54,13 +57,27 @@ exports.answer = function(req, res) {
     }
 };
 
-
-/*
- exports.maslo = function(req, res) {
- if(req.session.userName) {
- req.flash('bla', 'Your user name is: %s', req.session.userName);
- res.send('bla' + req.session.userName);
- } else {
- res.send("nikt nie został zalogowany jeszcze");
- }
- }*/
+exports.getQuestionById = function(req, res) {
+    questionProvider.getQuestion(req.param('questionId'), function(error, question) {
+        if(question) {
+            res.render('quizForm', {
+                layout : false,
+                myParams : {
+                    title : title,
+                    displayQuestion : false,
+                    question : question.question,
+                    a : question.a,
+                    b : question.b,
+                    c : question.c,
+                    d : question.d
+                }
+            });
+        } else {
+            res.send({
+                myParams : {
+                    error : true
+                }
+            });
+        }
+    });
+};

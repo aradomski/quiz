@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, sloppy: true */
-/*globals $: false, jConfirm: false, jAlert: false , dataTable: false */
+/*globals $: false, jConfirm: false, jAlert: false , dataTable: false, io : false */
 
 //przejście do panelu admina
 $(document).on("click", "#goToAdmin", function() {
@@ -57,4 +57,10 @@ $(document).on("click", "#toQuestionList", function() {
             jAlert('<img src="images/failure.jpg" width="500" height="375" alt="Ajax login error"/>', 'Division by zero error!');
         }
     });
+});
+/*COMETY */
+var socket = io.connect('http://localhost:1221');
+$(document).on("dblclick", "tbody tr", function() {
+    alert("wysyłam pytanie");
+    socket.emit('startQuestion', $(this).attr("id"));
 });

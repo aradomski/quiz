@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, sloppy: true */
-/*globals $: false, jConfirm: false, jAlert: false  */
+/*globals $: false, jConfirm: false, jAlert: false , io : false  */
 
 /*Zaznacznie odpowiedzi */
 $(document).on("click", "#answerBlock li", function() {
@@ -103,4 +103,10 @@ $(document).on("click", "#loginButton", function(e) {
         }
     }
 });
+/*COMETY*/
 
+var socket = io.connect(window.location);
+socket.on('question', function(need) {
+    alert(need);
+    $("#1").html(need);
+});

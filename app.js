@@ -82,5 +82,15 @@ app.get('/questionsJSON', adminHandlers.questionsJSON);
 
 app.get('/addQuestion', adminHandlers.addQuestion);
 
+app.get('/getQuestionById', handlers.getQuestionById);
+
 app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+
+io.sockets.on('connection', function(socket) {
+    socket.on('startQuestion', function(data) {
+        var myData = data;
+        console.log(myData + "  =======  " + data);
+        socket.broadcast.emit('question', myData);
+    });
+});
