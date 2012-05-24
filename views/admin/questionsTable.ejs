@@ -1,31 +1,44 @@
 <% if(session.userName==="Adam" ) {%>
-    <script>$(document).ready(function() {
-    $('#questionList').dataTable({
-        "aaSorting" : [[0, "asc"]],
-        "bScrollCollapse" : false,
-        "sScrollY" : "700px",
-        "bPaginate" : true,
-        "bProcessing" : true,
-        "sAjaxSource" : '/questionsJSON'
-        // ,"bStateSave" : true
-   		 });
-	});
-</script>
+    <script>
+        $(document).ready(function () {
+            $('#questionList').dataTable({
+                "aaSorting": [
+                    [0, "asc"]
+                ],
+                "bScrollCollapse": false,
+                "sScrollY": "700px",
+                "bPaginate": true,
+                "bProcessing": true,
+                "sAjaxSource": '/questionsJSON'
+                // ,"bStateSave" : true
+            });
+        });
+    </script>
     <link rel="stylesheet" href="/stylesheets/tableSort/jquery.dataTables.css">
     <% } %>
- <table id="questionList">
-                    <thead>
-                        <tr>
-                            <th>Question</th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>D</th>
-                            <th>Correct anwser</th>
-                            <th>Created at</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      
-                    </tbody>
-                </table>
+        <table id="questionList">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>Correct anwser</th>
+                    <th>Created at</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="timePopup">Wybierz czas trwania quizu:
+            <select id='time'>
+            	<option value='0.1'>0.1 minuty</option>
+                <option value='5'>5 minut</option>
+                <option value='10'>10 minut</option>
+                <option value='15'>15 minut</option>
+                <option value='20'>20 minut</option>
+                <option value='30'>30 minut</option>
+                <option value='45'>45 minut</option>
+            </select>
+            <button id="popupOk"> Wyślij </button>
+        </div>

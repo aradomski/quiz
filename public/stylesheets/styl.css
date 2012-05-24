@@ -128,3 +128,19 @@ footer {
   border-right: 2px solid #000000;
   border-bottom: 2px solid #000000;
 }
+#timePopup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 132;
+  border-style: solid;
+  border-width: 4;
+  border-color: #d5d5d5;
+  background-color: #eeeeee;
+  padding: 5px;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 10pt;
+  z-index: 2;
+  display: none;
+}

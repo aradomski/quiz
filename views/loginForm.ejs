@@ -1,6 +1,7 @@
 <% if(session.userName !== undefined) {%>
+ <script type="text/javascript" src="/javascripts/cometUser.js" ></script>
 	<section id="loginStatus">
-		Witaj <%= session.userName %> !
+		Witaj<b id="userName"> <%= session.userName %> </b><p id="userId" style="display:none"><%= session.userId %> </p> !
 	</section>
 <% }else{ %>
 	<% if(myParams.error === true) {%>

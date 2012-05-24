@@ -30,10 +30,12 @@ exports.login = function(req, res) {
         if(user) {
             var userName = req.param('userName');
             req.session.userName = userName;
+            req.session.userId = user._id;
             res.render('loginForm', {
                 layout : false,
                 myParams : {
                     userName : user.userName,
+                    id : user._id,
                     error : false
                 }
             });

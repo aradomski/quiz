@@ -61,6 +61,15 @@ $(document).on("click", "#toQuestionList", function() {
 /*COMETY */
 var socket = io.connect('http://localhost:1221');
 $(document).on("dblclick", "tbody tr", function() {
-    alert("wysyłam pytanie");
-    socket.emit('startQuestion', $(this).attr("id"));
+    var id = $(this).attr("id");
+    $("#timePopup").show();
+    $(document).on("click", "#popupOk", function() {
+        // alert($("#time").val() + "    " + id);
+        socket.emit('startQuestion', id, $("#time").val());
+        $("#timePopup").hide();
+    });
+});
+
+socket.on('userAnwsered', function(userName, anwser, correct) {
+    $("#1").append("userName = " + userName + "anwser = " + anwser + "correct = " + correct);
 });

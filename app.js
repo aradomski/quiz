@@ -87,10 +87,27 @@ app.get('/getQuestionById', handlers.getQuestionById);
 app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
+var sendFunction = function(time, socket) {
+    var timer = time * 60;
+    var interval = setInterval(function() {
+        socket.broadcast.emit('timeUpdate', timer);
+        timer -= 1;
+        console.log(timer);
+        if(timer === 0) {
+            clearInterval(interval);
+            socket.broadcast.emit('endQuestion', timer);
+        }
+    }, 1000);
+};
+
 io.sockets.on('connection', function(socket) {
-    socket.on('startQuestion', function(data) {
+    socket.on('startQuestion', function(data, time) {
         var myData = data;
-        console.log(myData + "  =======  " + data);
         socket.broadcast.emit('question', myData);
+        sendFunction(time, socket);
+    });
+    socket.on('answerQuestion', function(userId, userName, questionId, answer) {
+        var correct;
+        socket.broadcast.emit('userAnwsered', userName, answer, correct);
     });
 });
