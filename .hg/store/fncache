@@ -1114,3 +1114,7 @@ data/public/images/problem.png.i
 data/public/images/problem.png.d
 data/public/javascripts/cometUser.js.i
 data/views/admin/userStatus.ejs.i
+data/public/images/notPass.jpg.i
+data/public/images/notPass.jpg.d
+data/public/images/zdalem.gif.i
+data/public/images/zdalem.gif.d

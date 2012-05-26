@@ -1,1 +1,1 @@
-Funkcjonalności blokowania pytan po odpowiedzi i blokowania pytania innym userom po prawidłowej odpowiedzi
+wysyłanie userom wyników

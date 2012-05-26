@@ -3,13 +3,7 @@
 /**
  * Module dependencies.
  */
-var express = require('express'), handlers = require('./routes'), UserProvider = require('./providers/userProvider').UserProvider, adminHandlers = require('./routes/admin.js'), QuestionProvider = require('./providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider();
-
-var MongoStore = require('connect-mongo')(express), mongo = require('mongoose');
-
-var io = require('socket.io'), fs = require('fs');
-
-var app = module.exports = express.createServer(), io = io.listen(app);
+var express = require('express'), handlers = require('./routes'), UserProvider = require('./providers/userProvider').UserProvider, adminHandlers = require('./routes/admin.js'), QuestionProvider = require('./providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider(), MongoStore = require('connect-mongo')(express), mongo = require('mongoose'), io = require('socket.io'), fs = require('fs'), app = module.exports = express.createServer(), io = io.listen(app), userProvider = new UserProvider();
 
 // Configuration
 app.configure(function() {
@@ -50,9 +44,6 @@ app.configure('development', function() {
 app.configure('production', function() {
     app.use(express.errorHandler());
 });
-//Providers
-var userProvider = new UserProvider();
-
 // Routes
 app.get('/', handlers.home);
 
