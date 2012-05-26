@@ -24,6 +24,10 @@ exports.home = function(req, res) {
         }
     });
 };
+// exports.logout = function(req, res) {
+// delete req.session.userName;
+// delete req.session.userId;
+// };
 
 exports.login = function(req, res) {
     userProvider.getUser(req.param('userName'), req.param('pass'), function(error, user) {
@@ -31,6 +35,8 @@ exports.login = function(req, res) {
             var userName = req.param('userName');
             req.session.userName = userName;
             req.session.userId = user._id;
+            // var io = require('socket.io');
+            // io.sockets.broadcast.emit('userLoggedIn', userName, user._id);
             res.render('loginForm', {
                 layout : false,
                 myParams : {

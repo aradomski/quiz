@@ -1,19 +1,17 @@
-/*jslint node: true */
+/*jslint node: true, sloppy: true */
 /*global module: false, __dirname: false, console: false */
 /**
  * Module dependencies.
  */
+var express = require('express'), handlers = require('./routes'), UserProvider = require('./providers/userProvider').UserProvider, adminHandlers = require('./routes/admin.js'), QuestionProvider = require('./providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider();
 
-var express = require('express'), handlers = require('./routes'), UserProvider = require('./providers/userProvider').UserProvider, adminHandlers = require('./routes/admin.js');
-
-var mongoStore = require('connect-mongo')(express), mongo = require('mongoose');
+var MongoStore = require('connect-mongo')(express), mongo = require('mongoose');
 
 var io = require('socket.io'), fs = require('fs');
 
 var app = module.exports = express.createServer(), io = io.listen(app);
 
 // Configuration
-
 app.configure(function() {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
@@ -25,7 +23,7 @@ app.configure(function() {
     app.use(express.session({
         secret : 'topsecret',
         maxAge : new Date(Date.now() + 3600000),
-        store : new mongoStore({
+        store : new MongoStore({
             host : 'localhost',
             port : 27017,
             db : 'quiz',
@@ -53,14 +51,14 @@ app.configure('production', function() {
     app.use(express.errorHandler());
 });
 //Providers
-
 var userProvider = new UserProvider();
 
 // Routes
-
 app.get('/', handlers.home);
 
 app.post('/login', handlers.login);
+
+// app.get('/logout', handlers.logout);
 
 app.post('/answer', handlers.answer);
 
@@ -88,8 +86,7 @@ app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
 var sendFunction = function(time, socket) {
-    var timer = time * 60;
-    var interval = setInterval(function() {
+    var timer = time * 60, interval = setInterval(function() {
         socket.broadcast.emit('timeUpdate', timer);
         timer -= 1;
         console.log(timer);
@@ -106,8 +103,19 @@ io.sockets.on('connection', function(socket) {
         socket.broadcast.emit('question', myData);
         sendFunction(time, socket);
     });
+    socket.on('loggedIn', function(userName, userId) {
+        socket.broadcast.emit('userLoggedIn', userName, userId);
+    });
+
     socket.on('answerQuestion', function(userId, userName, questionId, answer) {
-        var correct;
-        socket.broadcast.emit('userAnwsered', userName, answer, correct);
+        var correct, i = 0;
+        questionProvider.getQuestion(questionId, function(error, question) {
+            if(question.correct === answer) {
+                correct = true;
+            } else {
+                correct = false;
+            }
+            socket.broadcast.emit('userAnwsered', userName, answer, correct);
+        });
     });
 });

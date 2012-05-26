@@ -6,31 +6,19 @@
 var socket = io.connect(window.location);
 var question_id;
 
+$(document).ready(function() {
+    var userName = $("#userName").text(), userId = $("#userId").text();
+    socket.emit('loggedIn', userName, userId);
+    alert(userName + "," + userId);
+});
+
 $(document).on("click", "#giveAnswer", function() {
     var answer = $("input[name='answer']:checked").val(), userId = $("#userId").text(), userName = $("#userName").text();
     if(answer !== undefined) {
         jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
             if(r === true) {
-                //  jAlert('Confirmed: ' + r, 'Confirmation Results');
-                $.ajax({
-                    type : "post",
-                    dataType : "html",
-                    context : document.html,
-                    url : "/answer/",
-                    data : "answer=" + answer,
-                    timeout : 2500,
-                    cache : false,
-                    success : function(html) {
-                        //location.hash = 'foo';
-                        $('#1').html(html);
-                    },
-                    error : function() {
-                        //$('#loginStatus').text('error');
-                        jAlert('<img src="images/failure.jpg" width="500" height="375" alt="Ajax login error"/>', 'Division by zero error!');
-                    }
-                });
                 socket.emit('answerQuestion', userId, userName, question_id, answer);
-                alert(answer + "  qid" + question_id + " uid" + userId + "userNaem " + userName);
+                // alert(answer + "  qid" + question_id + " uid" + userId + "userNaem " + userName);
             } else {
                 jAlert('I co myślisz że poprawisz odpowiedź?', 'Haha');
             }

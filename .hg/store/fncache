@@ -1109,3 +1109,7 @@ data/views/admin/userManager.ejs.i
 data/routes/admin.js.i
 data/views/admin/questionsTable.ejs.i
 data/views/admin/usersTable.ejs.i
+data/public/images/mad.jpg.i
+data/public/images/problem.png.i
+data/public/images/problem.png.d
+data/public/javascripts/cometUser.js.i

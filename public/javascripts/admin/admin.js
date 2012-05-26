@@ -58,6 +58,17 @@ $(document).on("click", "#toQuestionList", function() {
         }
     });
 });
+//Otwarcie/zamknięcie bocznej listy uzytkowników
+$(document).on("click", "#switch", function() {
+    $("#userStatusDiv").toggle();
+
+    if($("#userStatusDiv").css("display") === "block") {
+        $("#switch").css("right", "146px");
+    } else {
+        $("#switch").css("right", "0px");
+    }
+
+});
 /*COMETY */
 var socket = io.connect('http://localhost:1221');
 $(document).on("dblclick", "tbody tr", function() {
@@ -72,4 +83,9 @@ $(document).on("dblclick", "tbody tr", function() {
 
 socket.on('userAnwsered', function(userName, anwser, correct) {
     $("#1").append("userName = " + userName + "anwser = " + anwser + "correct = " + correct);
+});
+
+socket.on('userLoggedIn', function(userName, userId) {
+    // $("#1").append("userName = " + userName + "anwser = " + anwser + "correct = " + correct);
+    alert(userName + ' ' + userId);
 });

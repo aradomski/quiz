@@ -144,3 +144,28 @@ footer {
   z-index: 2;
   display: none;
 }
+#switch {
+  position: fixed;
+  right: 0px;
+  top: 50%;
+  width: 16px;
+  border-style: solid;
+  border-width: 4;
+  border-color: #d5d5d5;
+  background-color: #eeeeee;
+}
+#userStatusDiv {
+  position: fixed;
+  right: 0px;
+  top: 50%;
+  width: 130px;
+  border-style: solid;
+  border-width: 4;
+  border-color: #d5d5d5;
+  background-color: #eeeeee;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 10pt;
+  z-index: 2;
+  display: none;
+}
