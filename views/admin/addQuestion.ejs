@@ -1,12 +1,17 @@
 <% if(myParams.error === true) {%>
 	Dodawania pytania<br/>
 <% } %>
-<from id="questionForm">
-Question: <input type="text" name="question" >
-A: <input type="text" name="a" >
-B: <input type="text" name="b" >
-C: <input type="text" name="c" >
-D: <input type="text" name="d" >
-Correct: <input type="text" name="correct" >
-<input type="submit" class="a" id="addQuestionButton" value="Add question">
+<from id="questionForm">Question:
+    <input type="text" name="question">A:
+    <input type="text" name="a">B:
+    <input type="text" name="b">C:
+    <input type="text" name="c">D:
+    <input type="text" name="d">Correct:
+    <select name="correct">
+        <option value='A'>A</option>
+        <option value='B'>B</option>
+        <option value='C'>C</option>
+        <option value='D'>D</option>
+    </select>
+    <input type="submit" class="a" id="addQuestionButton" value="Add question">
 </form>

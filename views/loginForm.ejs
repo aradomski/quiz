@@ -20,7 +20,15 @@
 	<% } %>
 <% } %>
  <% if(session.userName === "Adam") {%>
+ 
 	<button id="goToAdmin">Adminuj!</button>
 	<script type="text/javascript" src="/javascripts/admin/admin.js" ></script>
 	<script type="text/javascript" src="/javascripts/admin/jquery.dataTables.min.js" ></script>
+	<div id="switch">←</div>
+	<div id="userStatusDiv">
+	<table >
+	<tbody id="userStatusTableBody">
+	</tbody>
+	</table>
+	</div>
  <% } %>

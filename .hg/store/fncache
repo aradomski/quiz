@@ -1113,3 +1113,4 @@ data/public/images/mad.jpg.i
 data/public/images/problem.png.i
 data/public/images/problem.png.d
 data/public/javascripts/cometUser.js.i
+data/views/admin/userStatus.ejs.i

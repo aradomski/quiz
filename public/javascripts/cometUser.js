@@ -9,16 +9,18 @@ var question_id;
 $(document).ready(function() {
     var userName = $("#userName").text(), userId = $("#userId").text();
     socket.emit('loggedIn', userName, userId);
-    alert(userName + "," + userId);
+    // alert(userName + "," + userId);
 });
-
+/*Wysyłanie odpowiedzi*/
 $(document).on("click", "#giveAnswer", function() {
     var answer = $("input[name='answer']:checked").val(), userId = $("#userId").text(), userName = $("#userName").text();
     if(answer !== undefined) {
         jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
             if(r === true) {
                 socket.emit('answerQuestion', userId, userName, question_id, answer);
-                // alert(answer + "  qid" + question_id + " uid" + userId + "userNaem " + userName);
+                $("#zegarek").html("KONIEC!!!");
+                $("#giveAnswer").hide();
+                $("#problem").show();
             } else {
                 jAlert('I co myślisz że poprawisz odpowiedź?', 'Haha');
             }
@@ -27,7 +29,7 @@ $(document).on("click", "#giveAnswer", function() {
         jAlert('<img src="images/urdoingitwrong.jpg" width="300" height="291" alt="U r doing it wrong!"/><br> Zaznacz odpowiedź!', 'U r doing it wrong!');
     }
 });
-
+/*odbieranie pytania*/
 socket.on('question', function(questionID) {
     question_id = questionID;
     $.ajax({
@@ -47,13 +49,13 @@ socket.on('question', function(questionID) {
         }
     });
 });
-
+/*Update czasu*/
 socket.on('timeUpdate', function(time) {
     time = time - 1;
     $("#zegarek").html("pozostało czasu: " + time);
 });
-
-socket.on('endQuestion', function(time) {
+/*Koniec pytania */
+socket.on('endQuestion', function() {
     $("#zegarek").html("KONIEC!!!");
     $("#giveAnswer").hide();
     $("#problem").show();

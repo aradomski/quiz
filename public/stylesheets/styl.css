@@ -153,6 +153,7 @@ footer {
   border-width: 4;
   border-color: #d5d5d5;
   background-color: #eeeeee;
+  z-index: 2;
 }
 #userStatusDiv {
   position: fixed;

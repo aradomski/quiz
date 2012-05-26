@@ -85,14 +85,16 @@ app.get('/getQuestionById', handlers.getQuestionById);
 app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
+var interval;
 var sendFunction = function(time, socket) {
-    var timer = time * 60, interval = setInterval(function() {
+    var timer = time * 60;
+    interval = setInterval(function() {
         socket.broadcast.emit('timeUpdate', timer);
         timer -= 1;
         console.log(timer);
         if(timer === 0) {
             clearInterval(interval);
-            socket.broadcast.emit('endQuestion', timer);
+            socket.broadcast.emit('endQuestion');
         }
     }, 1000);
 };
@@ -112,10 +114,12 @@ io.sockets.on('connection', function(socket) {
         questionProvider.getQuestion(questionId, function(error, question) {
             if(question.correct === answer) {
                 correct = true;
+                socket.broadcast.emit('endQuestion');
+                clearInterval(interval);
             } else {
                 correct = false;
             }
-            socket.broadcast.emit('userAnwsered', userName, answer, correct);
+            socket.broadcast.emit('userAnwsered', userName, userId, answer, correct);
         });
     });
 });

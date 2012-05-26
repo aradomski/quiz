@@ -81,11 +81,31 @@ $(document).on("dblclick", "tbody tr", function() {
     });
 });
 
-socket.on('userAnwsered', function(userName, anwser, correct) {
-    $("#1").append("userName = " + userName + "anwser = " + anwser + "correct = " + correct);
+socket.on('userAnwsered', function(userName, userId, answer, correct) {
+    var column;
+    // $("#1").append("userName = " + userName + "anwser = " + answer + "correct = " + correct);
+    $("#userStatusTableBody tr").each(function() {
+        if($(this).attr("id") === userId) {
+            column = $(this).find(".anwser");
+            column.html(answer);
+            if(correct) {
+                column.css("color", "#00FF00");
+            } else {
+                column.css("color", "#FF0000");
+            }
+        }
+    });
 });
 
 socket.on('userLoggedIn', function(userName, userId) {
-    // $("#1").append("userName = " + userName + "anwser = " + anwser + "correct = " + correct);
-    alert(userName + ' ' + userId);
+    var newUser = true, newRow = "<tr id ='" + userId + "' ><td >" + userName + "</td><td class='anwser'></td></tr>", html;
+    $("#userStatusTableBody tr").each(function() {
+        if($(this).attr("id") === userId) {
+            newUser = false;
+        }
+    });
+    if(newUser) {
+        html = $("#userStatusTableBody").html();
+        $("#userStatusTableBody").html(html + newRow);
+    }
 });
