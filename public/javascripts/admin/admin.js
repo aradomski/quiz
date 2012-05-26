@@ -109,3 +109,18 @@ socket.on('userLoggedIn', function(userName, userId) {
         $("#userStatusTableBody").html(html + newRow);
     }
 });
+
+$(document).on("click", "#sendResults", function() {
+    $("#userStatusTableBody tr").each(function() {
+        var userId = $(this).attr("id");
+        var result = $(this).children().last().css("color");
+        if(result === "rgb(0, 255, 0)") {
+            socket.emit('egzamResult', userId, true);
+        } else {
+            socket.emit('egzamResult', userId, false);
+        }
+
+        // alert(userId + "," + result);
+        //socket.emit('startQuestion', id, $("#time").val());
+    });
+});

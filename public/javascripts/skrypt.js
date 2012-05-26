@@ -12,34 +12,7 @@ $(document).on("click", "#answerBlock li", function() {
         $(this).children(":first").attr('checked', false);
     }
 });
-/*Wysyłanie odpowiedzi*/
 
-
-/*Czasomierz*/
-
-// var dodajZero = function(liczba) {'use strict';
-// if(liczba < 10 && liczba > 0) {
-// return "0" + liczba.toString();
-// } else if(liczba < 0) {
-// return;
-// }
-// return liczba;
-// };
-// $(document).ready(function() {
-// var futureDate = new Date("May 18, 2012 01:00:00 GMT+2"), futureTime = futureDate.getTime();
-// setInterval(function() {
-// var now = new Date(), timeLeft = Math.floor((futureTime - now.getTime()) / 1000);
-// $(".sec").text(dodajZero(timeLeft % 60));
-// timeLeft = Math.floor(timeLeft / 60);
-// $(".min").text(dodajZero(timeLeft % 60));
-// timeLeft = Math.floor(timeLeft / 60);
-// $(".hours").text(dodajZero(timeLeft % 24));
-// timeLeft = Math.floor(timeLeft / 24);
-// $(".days").text(dodajZero(timeLeft));
-// $(".currentTime").text(now.toString());
-// $(".endTime").text(futureDate.toString());
-// }, 1000);
-// });
 
 /*Logowanie*/
 $(document).on("click", "#loginButton", function(e) {

@@ -122,4 +122,7 @@ io.sockets.on('connection', function(socket) {
             socket.broadcast.emit('userAnwsered', userName, userId, answer, correct);
         });
     });
+    socket.on('egzamResult', function(userId, result) {
+        socket.broadcast.emit('result', userId, result);
+    });
 });

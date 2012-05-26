@@ -1,1 +1,1 @@
-podstawy informacji o użytkownikach w panelu adnima
+Funkcjonalności blokowania pytan po odpowiedzi i blokowania pytania innym userom po prawidłowej odpowiedzi

@@ -3,8 +3,7 @@
 
 /*COMETY*/
 
-var socket = io.connect(window.location);
-var question_id;
+var socket = io.connect(window.location), question_id, egzamPassed, egzamFailed;
 
 $(document).ready(function() {
     var userName = $("#userName").text(), userId = $("#userId").text();
@@ -60,3 +59,20 @@ socket.on('endQuestion', function() {
     $("#giveAnswer").hide();
     $("#problem").show();
 });
+/*Wyniki */
+socket.on('result', function(userId, result) {
+    var thisUserId = $("#userId").text();
+    if(thisUserId === userId) {
+        if(result) {
+            egzamPassed();
+        } else {
+            egzamFailed();
+        }
+    }
+});
+egzamPassed = function() {
+    jAlert('<img src="images/zdalem.gif" width="300" height="174" alt="pass"/>', 'Gratuluję zdałeś!');
+};
+egzamFailed = function() {
+    jAlert('<img src="images/notPass.jpg" width="375" height="493" alt="not pass"/>', 'You shall not pass!');
+};
