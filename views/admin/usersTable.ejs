@@ -1,4 +1,4 @@
-<% if(session.userName==="Adam" ) {%>
+<% if(session.isAdmin===true ) {%>
     <script>
         $(document).ready(function () {
             var button = "AAAA";
@@ -23,6 +23,8 @@
                     <th>User name</th>
                     <th>Password</th>
                     <th>Created at</th>
+                    <th>Group</th>
+                    <th>Is admin</th>
                 </tr>
             </thead>
             <tbody></tbody>

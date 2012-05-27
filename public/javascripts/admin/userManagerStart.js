@@ -5,7 +5,7 @@ $(function() {
     $("#userTabs").tabs({
         ajaxOptions : {
             error : function(xhr, status, index, anchor) {
-                $(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible. " + "If this wouldn't be a demo.");
+                $(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
             }
         }
     });
@@ -13,15 +13,18 @@ $(function() {
 /*Rejestracja*/
 $(document).on("click", "#registerButton", function(e) {
     e.preventDefault();
-    var pass = $("#registerForm #pass").val(), pass2 = $("#registerForm #pass2").val(), userName = $("#registerForm #registerUserName").val();
-    //alert(pass);
-    //alert(userName);
+    var pass = $("#registerForm #pass").val(), pass2 = $("#registerForm #pass2").val(), userName = $("#registerForm #registerUserName").val(), group = $("#registerForm #group").val();
+
+    // alert(group);
+    // alert(pass);
+    // alert(userName);
+
     if(pass !== "" && pass2 !== "" && pass === pass2 && userName !== "") {
         $.ajax({
             type : "get",
             dataType : "html",
             context : document.html,
-            url : "/register?" + "userName=" + userName + "&pass=" + pass,
+            url : "/register?" + "userName=" + userName + "&pass=" + pass + "&group=" + group,
             timeout : 2500,
             cache : false,
             success : function(html) {

@@ -19,7 +19,7 @@
 		<img src="/images/usernotfound.jpg" width="221" height="166" alt="user not found" />
 	<% } %>
 <% } %>
- <% if(session.userName === "Adam") {%>
+ <% if(session.isAdmin === true) {%>
  
 	<button id="goToAdmin">Adminuj!</button>
 	<script type="text/javascript" src="/javascripts/admin/admin.js" ></script>
