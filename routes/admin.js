@@ -1,6 +1,6 @@
 /*jslint browser: true, devel: true, sloppy: true  */
 /*globals $: false, jConfirm: false, jAlert: false , io : false, window: false, require : false, exports: false */
-var UserProvider = require('../providers/userProvider').UserProvider, userProvider = new UserProvider(), QuestionProvider = require('../providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider(), tableStringLenght = 40;
+var UserProvider = require('../providers/userProvider').UserProvider, userProvider = new UserProvider(), QuestionProvider = require('../providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider(), tableStringLenght = 40, QuestionSetProvider = require('../providers/questionSetProvider').QuestionSetProvider, questionSetProvider = new QuestionSetProvider();
 
 exports.admin = function(req, res) {
     if(req.session.isAdmin === true) {
@@ -225,6 +225,107 @@ exports.addQuestion = function(req, res) {
                     res.send("Pomyślnie dodano pytanie");
                 } else {
                     res.render('admin/addQuestion', {
+                        layout : false,
+                        myParams : {
+                            error : true
+                        }
+                    });
+                }
+            });
+        }
+    } else {
+        res.send("Brak uprawnien");
+    }
+};
+/* ZESTAWY PYTAN */
+
+exports.questionsSet = function(req, res) {
+    if(req.session.isAdmin === true) {
+        questionSetProvider.getAllQuestionsSet(function(error, questionsSet) {
+            if(questionsSet) {//  console.log(users);
+                res.render('admin/questionSetManager', {
+                    layout : false,
+                    myParams : {
+                        questionsSet : questionsSet
+                    }
+                });
+            } else {
+                res.send("error");
+            }
+        });
+    } else {
+        res.send("Brak uprawnien");
+    }
+};
+
+exports.questionsSetTable = function(req, res) {
+    if(req.session.isAdmin === true) {
+        questionSetProvider.getAllQuestionsSet(function(error, questionsSet) {
+            if(questionsSet) {//  console.log(users);
+                res.render('admin/questionsSetTable', {
+                    layout : false,
+                    myParams : {
+                        questionsSet : questionsSet
+                    }
+                });
+            } else {
+                res.send("error");
+            }
+        });
+    } else {
+        res.send("Nie prawidłowy użytkownik");
+    }
+};
+
+exports.questionsSetJSON = function(req, res) {
+    var i, aaData = [], row, data = [];
+
+    if(req.session.isAdmin === true) {
+        questionSetProvider.getAllQuestionsSet(function(error, questionsSet) {
+            if(questionsSet) {
+                // console.log(questions);
+                for( i = 0; i < questionsSet.length; i += 1) {
+                    row = {
+                        "0" : questionsSet[i].name,
+                        "1" : questionsSet[i].className,
+                        "2" : questionsSet[i].created_at,
+                        "DT_RowId" : questionsSet[i]._id
+                    };
+                    data.push(row);
+                }
+                aaData = {
+                    "aaData" : data
+                };
+                res.send(aaData);
+            } else {
+                res.send("error");
+            }
+        });
+    } else {
+        res.send("Brak uprawnien");
+    }
+};
+
+exports.addQuestionSet = function(req, res) {
+    if(req.session.isAdmin === true) {
+        var name = req.param('name'), className = req.param('className');
+
+        if(name === undefined || className === undefined) {
+            res.render('admin/addQuestionSet', {
+                layout : false,
+                myParams : {
+                    error : false
+                }
+            });
+        } else {
+            questionSetProvider.save({
+                name : name,
+                className : className
+            }, function(error, questionSet) {
+                if(questionSet) {
+                    res.send("Pomyślnie dodano zestaw pytan");
+                } else {
+                    res.render('admin/addQuestionSet', {
                         layout : false,
                         myParams : {
                             error : true

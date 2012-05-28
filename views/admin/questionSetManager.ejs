@@ -1,0 +1,20 @@
+ <% if(session.isAdmin=== true) {%>
+    <script type="text/javascript" src="/javascripts/admin/questionSetManagerStart.js"></script>
+    <link rel="stylesheet" href="/stylesheets/tableSort/jquery.dataTables.css">
+    <% } %>
+    <div id="questionSetTabs">
+            <ul>
+                <li>
+                    <a href="/questionsSetTable">List questions set</a>
+                </li>
+                <li>
+                    <a href="/addQuestionSet">Add question set</a>
+                </li>
+            </ul>
+            <div id="listQuestionSet">
+            
+            </div>
+            <div id="addQuestionSet">
+			
+			</div>
+        </div>

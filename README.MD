@@ -28,3 +28,6 @@ Questions:
 	correct
 	created_at
 	_id
+
+Wysyłanie użytkownikom pytan :
+	Podwójne kliknięcie na wierszu w tabeli pytań

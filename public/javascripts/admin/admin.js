@@ -58,6 +58,25 @@ $(document).on("click", "#toQuestionList", function() {
         }
     });
 });
+//przejście do listy zestawów pytan
+$(document).on("click", "#toQuestionSetList", function() {
+    $.ajax({
+        type : "post",
+        dataType : "html",
+        context : document.html,
+        url : "/questionsSet/",
+        timeout : 2500,
+        cache : false,
+        success : function(html) {
+            //location.hash = 'foo';
+            $('#adminContent').html(html);
+        },
+        error : function() {
+            //$('#loginStatus').text('error');
+            jAlert('<img src="images/failure.jpg" width="500" height="375" alt="Ajax login error"/>', 'Division by zero error!');
+        }
+    });
+});
 //Otwarcie/zamknięcie bocznej listy uzytkowników
 $(document).on("click", "#switch", function() {
     $("#userStatusDiv").toggle();

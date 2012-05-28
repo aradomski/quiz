@@ -56,22 +56,21 @@ app.post('/answer', handlers.answer);
 app.post('/admin', adminHandlers.admin);
 
 app.post('/users', adminHandlers.users);
-
 app.get('/usersTable', adminHandlers.usersTable);
-
 app.get('/usersJSON', adminHandlers.usersJSON);
-
 app.get('/register', adminHandlers.register);
 
 app.post('/questions', adminHandlers.questions);
-
 app.get('/questionsTable', adminHandlers.questionsTable);
-
 app.get('/questionsJSON', adminHandlers.questionsJSON);
-
 app.get('/addQuestion', adminHandlers.addQuestion);
-
 app.get('/getQuestionById', handlers.getQuestionById);
+
+app.post('/questionsSet', adminHandlers.questionsSet);
+app.get('/questionsSetTable', adminHandlers.questionsSetTable);
+app.get('/questionsSetJSON', adminHandlers.questionsSetJSON);
+app.get('/addQuestionSet', adminHandlers.addQuestionSet);
+app.get('/getQuestionSetById', handlers.getQuestionSetById);
 
 app.listen(1221);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
