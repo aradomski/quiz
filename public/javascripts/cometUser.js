@@ -1,7 +1,7 @@
 /*jslint browser: true, devel: true, sloppy: true  */
-/*globals $: false, jConfirm: false, jAlert: false , io : false, window: false */
+/*globals $: false, jConfirm: false, jAlert: false , io : false, window: false, createQForm : false */
 /*COMETY*/
-var socket = io.connect(window.location), questionSet_id, egzamPassed, egzamFailed;
+var socket = io.connect(window.location), questionSet_id, egzamPassed, egzamFailed, SET;
 
 $(document).ready(function() {
     var userName = $("#userName").text(), userId = $("#userId").text();
@@ -40,7 +40,9 @@ socket.on('question', function(questionSetID) {
             //location.hash = 'foo';
             // $('#quiz').html(html);
             //alert(html);
-            alert(html.setHeaders.name);
+            SET = html;
+            // alert(html.setHeaders.name);
+            createQForm(html.set[0], 0, html.set.length);
         },
         error : function() {
             //    $('#loginStatus').text('error');
