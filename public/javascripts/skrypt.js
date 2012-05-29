@@ -12,10 +12,17 @@ $(document).on("click", "#answerBlock li", function() {
     }
 });
 var createQForm = function(question, currNum, lenght) {
-    var questionText = question.question, a = question.a, b = question.b, c = question.c, d = question.d, id = question._id;
+    var questionText = question.question, a = question.a, b = question.b, c = question.c, d = question.d, id = question._id, root = $("#quiz");
 
-    alert(questionText + " " + a + b + c + d + " id = " + id);
-
+    // alert(questionText + " " + a + b + c + d + " id = " + id);
+    root.html("");
+    root.append("<p>" + questionText + "</p>");
+    root.append("<ul id='answerBlock' name='" + id + "'>");
+    root.append("<li id='answerA' class='answer'> <input type='radio' name='answer' value='A' class='radioAnswer'><h1 class='answerH1'>A</h1><span class='answerSpan'>" + a + "</span></li>");
+    root.append("<li id='answerB' class='answer'> <input type='radio' name='answer' value='B' class='radioAnswer'><h1 class='answerH1'>B</h1><span class='answerSpan'>" + b + "</span></li>");
+    root.append("<li id='answerC' class='answer'> <input type='radio' name='answer' value='C' class='radioAnswer'><h1 class='answerH1'>C</h1><span class='answerSpan'>" + c + "</span></li>");
+    root.append("<li id='answerD' class='answer'> <input type='radio' name='answer' value='D' class='radioAnswer'><h1 class='answerH1'>D</h1><span class='answerSpan'>" + d + "</span></li>");
+    root.append("</ul>");
 };
 /*Logowanie*/
 $(document).on("click", "#loginButton", function(e) {
