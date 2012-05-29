@@ -23,20 +23,22 @@ QuestionSetProvider.prototype.getCollection = function(callback) {
 // zwracanie jednego pytania
 QuestionSetProvider.prototype.getQuestionSet = function(id, callback) {
     this.getCollection(function(error, questionSet_collection) {
-        var string = 'ObjectId("' + id + '")';
+        var string = 'ObjectId("' + id + '")', object_id;
         // var string = id;
-        console.log(string);
+        // console.log("id set = " + id);
+        object_id = new ObjectID(id);
+        console.log("object id = " + object_id + "id" + id);
         if(error) {
             callback(error);
         } else {
             // operacje na kolekcji zwróconej z getCollection
             questionSet_collection.findOne({
-                "_id" : new ObjectID(id)
+                "_id" : object_id
             }, function(error, result) {
                 if(error) {
                     callback(error);
                 } else {
-                    console.log("Znajduje pytanie o id: " + string + " o tresci: " + result.question);
+                    console.log("Znajduje set o id: " + string + " o tresci: " + result.name);
                     callback(null, result);
                 }
             });

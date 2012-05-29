@@ -1,6 +1,6 @@
 /*jslint browser: true, devel: true, sloppy: true  */
 /*globals $: false, jConfirm: false, jAlert: false , io : false, window: false, require : false, exports: false */
-var UserProvider = require('../providers/userProvider').UserProvider, userProvider = new UserProvider(), QuestionProvider = require('../providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider(), tableStringLenght = 40, QuestionSetProvider = require('../providers/questionSetProvider').QuestionSetProvider, questionSetProvider = new QuestionSetProvider();
+var UserProvider = require('../providers/userProvider').UserProvider, userProvider = new UserProvider(), QuestionProvider = require('../providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider(), tableStringLenght = 40, QuestionSetProvider = require('../providers/questionSetProvider').QuestionSetProvider, questionSetProvider = new QuestionSetProvider(), ObjectID = require('mongodb').ObjectID;
 
 exports.admin = function(req, res) {
     if(req.session.isAdmin === true) {
@@ -177,8 +177,10 @@ exports.questionsJSON = function(req, res) {
                         "3" : questions[i].c,
                         "4" : questions[i].d,
                         "5" : questions[i].correct,
-                        "6" : questions[i].created_at,
+                        "6" : questions[i].name || "none",
+                        "7" : questions[i].created_at,
                         "DT_RowId" : questions[i]._id
+                        // "DT_RowId" : questions[i].set || "none"
                     };
                     data.push(row);
                 }
@@ -197,7 +199,7 @@ exports.questionsJSON = function(req, res) {
 
 exports.addQuestion = function(req, res) {
     if(req.session.isAdmin === true) {
-        var question = req.param('question'), a = req.param('a'), b = req.param('b'), c = req.param('c'), d = req.param('d'), correct = req.param('correct');
+        var question = req.param('question'), a = req.param('a'), b = req.param('b'), c = req.param('c'), d = req.param('d'), correct = req.param('correct'), set = req.param('set'), name = req.param('name');
 
         console.log(a);
         console.log(b);
@@ -205,11 +207,18 @@ exports.addQuestion = function(req, res) {
         console.log(d);
         console.log(question);
         console.log(correct);
-        if(question === undefined || a === undefined || b === undefined || c === undefined || d === undefined || correct === undefined) {
-            res.render('admin/addQuestion', {
-                layout : false,
-                myParams : {
-                    error : false
+        if(question === undefined || a === undefined || b === undefined || c === undefined || d === undefined || correct === undefined || set === undefined || name === undefined) {
+            questionSetProvider.getAllQuestionsSet(function(error, questionsSet) {
+                if(questionsSet) {//  console.log(users);
+                    res.render('admin/addQuestion', {
+                        layout : false,
+                        myParams : {
+                            error : false,
+                            qSet : questionsSet
+                        }
+                    });
+                } else {
+                    res.send("error");
                 }
             });
         } else {
@@ -219,7 +228,9 @@ exports.addQuestion = function(req, res) {
                 b : b,
                 c : c,
                 d : d,
-                correct : correct
+                correct : correct,
+                set : new ObjectID(set),
+                name : name
             }, function(error, question) {
                 if(question) {
                     res.send("Pomyślnie dodano pytanie");

@@ -1,6 +1,6 @@
 /*jslint browser: true, devel: true, sloppy: true  */
 /*globals $: false, jConfirm: false, jAlert: false , io : false, window: false, require : false, exports: false */
-var UserProvider = require('../providers/userProvider').UserProvider, userProvider = new UserProvider(), QuestionProvider = require('../providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider(), title = 'You shall not pass!', welcomeText = "Witam wszystkich na kole. Kto pierwszy ten lepszy! ";
+var UserProvider = require('../providers/userProvider').UserProvider, userProvider = new UserProvider(), QuestionProvider = require('../providers/questionProvider').QuestionProvider, questionProvider = new QuestionProvider(), title = 'You shall not pass!', welcomeText = "Witam wszystkich na kole. Kto pierwszy ten lepszy! ", QuestionSetProvider = require('../providers/questionSetProvider').QuestionSetProvider, questionSetProvider = new QuestionSetProvider();
 
 exports.home = function(req, res) {
     res.render('index', {
@@ -69,6 +69,44 @@ exports.getQuestionById = function(req, res) {
                     b : question.b,
                     c : question.c,
                     d : question.d
+                }
+            });
+        } else {
+            res.send({
+                myParams : {
+                    error : true
+                }
+            });
+        }
+    });
+};
+exports.getQuestionSetById = function(req, res) {
+    var doWyslania = {}, i = 0;
+    console.log("questionSetID  =  " + req.param('questionSetID'));
+    questionSetProvider.getQuestionSet(req.param('questionSetID'), function(error, questionSet) {
+        if(questionSet) {
+            questionProvider.getQuestionBySetID(req.param('questionSetID'), function(error, questions) {
+                if(questions) {
+
+                    // res.render('quizForm', {
+                    // layout : false,
+                    // myParams : {
+                    // title : title,
+                    // displayQuestion : false,
+                    // questionSet : questionSet.name || "none",
+                    // a : questionSet.className || "none",
+                    // b : questionSet.b || "none",
+                    // c : questionSet.c || "none",
+                    // d : questionSet.d || "none"
+                    // }
+
+                    // res.send("questionSet.name= " + questionSet.name + "questionSet.className =" + questionSet.className + "question = " + questions[0].question + "a = " + questions[0].a + "b = " + questions[0].b + "c = " + questions[0].c + "d = " + questions[0].d);
+                    doWyslania = {
+                        "setHeaders" : questionSet,
+                        "set" : questions
+                    };
+                    res.send(doWyslania);
+
                 }
             });
         } else {

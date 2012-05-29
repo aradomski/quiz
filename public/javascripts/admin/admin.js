@@ -90,6 +90,7 @@ $(document).on("click", "#switch", function() {
 });
 /*COMETY */
 var socket = io.connect('http://localhost:1221');
+
 $(document).on("dblclick", "tbody tr", function() {
     var id = $(this).attr("id");
     $("#timePopup").show();

@@ -20,7 +20,7 @@ QuestionProvider.prototype.getCollection = function(callback) {
         }
     });
 };
-// zwracanie jednego pytania
+// zwracanie jednego pytania po id
 QuestionProvider.prototype.getQuestion = function(id, callback) {
     this.getCollection(function(error, question_collection) {
         var string = 'ObjectId("' + id + '")';
@@ -43,7 +43,25 @@ QuestionProvider.prototype.getQuestion = function(id, callback) {
         }
     });
 };
-//zwracanie wszystkich userów
+// zwracanie pytan po id setu
+QuestionProvider.prototype.getQuestionBySetID = function(id, callback) {
+    var setID = new ObjectID(id);
+    this.getCollection(function(error, questions_collection) {
+        if(error) {
+            callback(error);
+        } else {
+            questions_collection.find({
+                set : setID
+            }).toArray(function(error, results) {
+                if(error) {
+                    callback(error);
+                } else {
+                    callback(null, results);
+                }
+            });
+        }
+    });
+};
 QuestionProvider.prototype.getAllQuestions = function(callback) {
     this.getCollection(function(error, questions_collection) {
         if(error) {

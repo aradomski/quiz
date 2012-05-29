@@ -1,23 +1,20 @@
 /*jslint browser: true, devel: true, sloppy: true  */
 /*globals $: false, jConfirm: false, jAlert: false , io : false, window: false */
 /*COMETY*/
-var socket = io.connect(window.location), question_id, egzamPassed, egzamFailed;
+var socket = io.connect(window.location), questionSet_id, egzamPassed, egzamFailed;
 
-$(document).ready(function () {
-    var userName = $("#userName").text(),
-        userId = $("#userId").text();
+$(document).ready(function() {
+    var userName = $("#userName").text(), userId = $("#userId").text();
     socket.emit('loggedIn', userName, userId);
     // alert(userName + "," + userId);
 });
 /*Wysyłanie odpowiedzi*/
-$(document).on("click", "#giveAnswer", function () {
-    var answer = $("input[name='answer']:checked").val(),
-        userId = $("#userId").text(),
-        userName = $("#userName").text();
-    if (answer !== undefined) {
-        jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function (r) {
-            if (r === true) {
-                socket.emit('answerQuestion', userId, userName, question_id, answer);
+$(document).on("click", "#giveAnswer", function() {
+    var answer = $("input[name='answer']:checked").val(), userId = $("#userId").text(), userName = $("#userName").text();
+    if(answer !== undefined) {
+        jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
+            if(r === true) {
+                socket.emit('answerQuestion', userId, userName, questionSet_id, answer);
                 $("#giveAnswer").hide();
                 $("#problem").show();
             } else {
@@ -29,50 +26,53 @@ $(document).on("click", "#giveAnswer", function () {
     }
 });
 /*odbieranie pytania*/
-socket.on('question', function (questionID) {
-    question_id = questionID;
+socket.on('question', function(questionSetID) {
+    questionSet_id = questionSetID;
+    // alert(questionSetID);
     $.ajax({
-        type: "get",
-        dataType: "html",
-        context: document.html,
-        url: "/getQuestionById?questionId=" + questionID,
-        timeout: 2500,
-        cache: false,
-        success: function (html) {
+        type : "get",
+        dataType : "JSON",
+        // context : document.html,
+        url : "/getQuestionSetById?questionSetID=" + questionSetID,
+        timeout : 2500,
+        cache : false,
+        success : function(html) {
             //location.hash = 'foo';
-            $('#quiz').html(html);
+            // $('#quiz').html(html);
+            //alert(html);
+            alert(html.setHeaders.name);
         },
-        error: function () {
+        error : function() {
             //    $('#loginStatus').text('error');
             jAlert('<img src="images/failure.jpg" width="500" height="375" alt="Ajax login error"/>', 'Division by zero error!');
         }
     });
 });
 /*Update czasu*/
-socket.on('timeUpdate', function (time) {
+socket.on('timeUpdate', function(time) {
     time = time - 1;
     $("#zegarek").html("pozostało czasu: " + time);
 });
 /*Koniec pytania */
-socket.on('endQuestion', function () {
+socket.on('endQuestion', function() {
     $("#zegarek").html("KONIEC!!!");
     $("#giveAnswer").hide();
     $("#problem").show();
 });
 /*Wyniki */
-socket.on('result', function (userId, result) {
+socket.on('result', function(userId, result) {
     var thisUserId = $("#userId").text();
-    if (thisUserId === userId) {
-        if (result) {
+    if(thisUserId === userId) {
+        if(result) {
             egzamPassed();
         } else {
             egzamFailed();
         }
     }
 });
-egzamPassed = function () {
+egzamPassed = function() {
     jAlert('<img src="images/zdalem.gif" width="300" height="174" alt="pass"/>', 'Gratuluję zdałeś!');
 };
-egzamFailed = function () {
+egzamFailed = function() {
     jAlert('<img src="images/notPass.jpg" width="375" height="493" alt="not pass"/>', 'You shall not pass!');
 };

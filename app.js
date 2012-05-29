@@ -90,9 +90,9 @@ var sendFunction = function(time, socket) {
 };
 
 io.sockets.on('connection', function(socket) {
-    socket.on('startQuestion', function(data, time) {
-        var myData = data;
-        socket.broadcast.emit('question', myData);
+    socket.on('startQuestion', function(id, time) {
+        // console.log("id === " + id);
+        socket.broadcast.emit('question', id);
         sendFunction(time, socket);
     });
     socket.on('loggedIn', function(userName, userId) {

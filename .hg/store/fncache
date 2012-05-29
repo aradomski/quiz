@@ -1120,3 +1120,8 @@ data/public/images/zdalem.gif.i
 data/public/images/zdalem.gif.d
 data/public/images/playGame.jpg.i
 data/README.MD.i
+data/providers/questionSetProvider.js.i
+data/public/javascripts/admin/questionSetManagerStart.js.i
+data/views/admin/addQuestionSet.ejs.i
+data/views/admin/questionSetManager.ejs.i
+data/views/admin/questionsSetTable.ejs.i
