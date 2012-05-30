@@ -13,8 +13,9 @@ exports.home = function(req, res) {
 };
 
 exports.logout = function(req, res) {
-    req.session._id = "";
-    res.send("wylogowano pomyślnie!");
+    var string = "wylogowano pomyślnie!" + req.session._id + "  " + req.session.userName + "  " + req.session.userId;
+    req.session.cookie.expires = new Date(Date.now());
+    res.send("wylogowano pomyślnie!" + req.session._id + "  " + req.session.userName + "  " + req.session.userId + string);
 };
 
 exports.login = function(req, res) {
