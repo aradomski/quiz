@@ -49,7 +49,7 @@ app.get('/', handlers.home);
 
 app.post('/login', handlers.login);
 
-app.get('/logout', handlers.logout);
+app.post('/logout', handlers.logout);
 
 app.post('/answer', handlers.answer);
 

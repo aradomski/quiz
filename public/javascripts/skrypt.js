@@ -121,6 +121,26 @@ $(document).on("click", "#loginButton", function(e) {
         }
     }
 });
+//Wylogowanie
+$(document).on("click", "#logout", function() {
+    $.ajax({
+        type : "post",
+        dataType : "html",
+        context : document.html,
+        url : "/logout",
+        timeout : 2500,
+        cache : false,
+        success : function(html) {
+            //location.hash = 'foo';
+            $('#loginStatus').remove();
+            $('#leftMenu').append("<section id='loginStatus'> <b>Login:</b><form><input id='loginUserName' type='text' name='userName'> <br><b>Haslo:</b><input id='loginPass' type='password' name='pass'><button id='loginButton'>Zaloguj</button></form></section>");
+        },
+        error : function() {
+            //    $('#loginStatus').text('error');
+            jAlert('<img src="images/failure.jpg" width="500" height="375" alt="Ajax login error"/>', 'Division by zero error!');
+        }
+    });
+});
 /*AFTER END SCRIPTS*/
 
 $(document).on("click", "#problem", function(e) {

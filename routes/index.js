@@ -13,9 +13,13 @@ exports.home = function(req, res) {
 };
 
 exports.logout = function(req, res) {
-    var string = "wylogowano pomyślnie!" + req.session._id + "  " + req.session.userName + "  " + req.session.userId;
-    req.session.cookie.expires = new Date(Date.now());
-    res.send("wylogowano pomyślnie!" + req.session._id + "  " + req.session.userName + "  " + req.session.userId + string);
+    req.session.cookie.expires = new Date(Date.now() - 5);
+    res.render('loginForm', {
+        layout : false,
+        myParams : {
+            error : true
+        }
+    });
 };
 
 exports.login = function(req, res) {
