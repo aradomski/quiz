@@ -2,6 +2,7 @@
  <script type="text/javascript" src="/javascripts/cometUser.js" ></script>
 	<section id="loginStatus">
 		Witaj<b id="userName"> <%= session.userName %> </b><p id="userId" style="display:none"><%= session.userId %> </p> !
+		<a href="/logout">Logout</a>
 	</section>
 <% }else{ %>
 	<% if(myParams.error === true) {%>

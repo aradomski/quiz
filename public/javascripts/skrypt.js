@@ -5,7 +5,7 @@ var sendSet = {}, questionsAnwsers = [], findAndRemove, createQForm;
 
 /*Zaznacznie odpowiedzi */
 $(document).on("click", "#answerBlock li", function() {
-    var answer, qID;
+    var answer, qID, currNum = parseInt($("#currNum").text());
     //zaznaczanie
     if($(this).attr('class') === 'answer') {
         $("#answerBlock .answerChecked").attr('class', 'answer');
@@ -16,7 +16,8 @@ $(document).on("click", "#answerBlock li", function() {
         findAndRemove(questionsAnwsers, qID);
         questionsAnwsers.push({
             qID : qID,
-            answer : answer
+            answer : answer,
+            qNum : currNum
         });
         // $("#1").text("");
         // var txt = ""

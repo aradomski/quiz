@@ -11,10 +11,12 @@ exports.home = function(req, res) {
         }
     });
 };
-// exports.logout = function(req, res) {
-// delete req.session.userName;
-// delete req.session.userId;
-// };
+
+exports.logout = function(req, res) {
+    req.session._id = "";
+    res.send("wylogowano pomyślnie!");
+};
+
 exports.login = function(req, res) {
     userProvider.getUser(req.param('userName'), req.param('pass'), function(error, user) {
         if(user) {

@@ -49,7 +49,7 @@ app.get('/', handlers.home);
 
 app.post('/login', handlers.login);
 
-// app.get('/logout', handlers.logout);
+app.get('/logout', handlers.logout);
 
 app.post('/answer', handlers.answer);
 
@@ -105,7 +105,6 @@ io.sockets.on('connection', function(socket) {
         console.log(anwserSet.qID + "  " + anwserSet.answer);
         questionProvider.getQuestion(anwserSet.qID, function(error, question) {
             if(question.correct === anwserSet.answer) {
-                console.log("prawda");
                 correct = true;
                 socket.broadcast.emit('endQuestion', anwserSet.qID);
                 // clearInterval(interval);

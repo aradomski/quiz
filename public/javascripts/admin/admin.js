@@ -102,17 +102,23 @@ $(document).on("dblclick", "tbody tr", function() {
 });
 
 socket.on('userAnwsered', function(userName, userId, anwserSet) {
-    var column;
+    var column, oldHmtl, nowy;
     // $("#1").append("userName = " + userName + "anwser = " + answer + "correct = " + correct);
     $("#userStatusTableBody tr").each(function() {
         if($(this).attr("id") === userId) {
             column = $(this).find(".anwser");
-            column.html(anwserSet.answer);
+            oldHmtl = column.html();
+            alert(anwserSet.qNum + anwserSet.answer);
             if(anwserSet.correct) {
-                column.css("color", "#00FF00");
+                //      column.css("color", "#00FF00");
+                nowy = "<b style='color:#00FF00' > " + anwserSet.qNum + ":" + anwserSet.answer + "</b>";
             } else {
-                column.css("color", "#FF0000");
+                // column.css("color", "#FF0000");
+                nowy = "<b style='color:#FF0000' > " + anwserSet.qNum + ":" + anwserSet.answer + "</b>";
             }
+            alert(oldHmtl);
+            oldHmtl += nowy;
+            column.html(oldHmtl);
         }
     });
 });
