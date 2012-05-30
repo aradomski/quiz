@@ -9,14 +9,12 @@ $(document).ready(function() {
     // alert(userName + "," + userId);
 });
 /*Wysyłanie odpowiedzi*/
-$(document).on("click", "#giveAnswer", function() {
-    var answer = $("input[name='answer']:checked").val(), userId = $("#userId").text(), userName = $("#userName").text();
-    if(answer !== undefined) {
+$(document).on("click", "#giveAnswer", function(anwserSet) {
+    var userId = $("#userId").text(), userName = $("#userName").text();
+    if(anwserSet !== undefined) {
         jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
             if(r === true) {
-                socket.emit('answerQuestion', userId, userName, questionSet_id, answer);
-                $("#giveAnswer").hide();
-                $("#problem").show();
+                socket.emit('answerQuestion', userId, userName, anwserSet);
             } else {
                 jAlert('I co myślisz że poprawisz odpowiedź?', 'Haha');
             }
