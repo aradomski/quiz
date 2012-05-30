@@ -101,14 +101,14 @@ $(document).on("dblclick", "tbody tr", function() {
     });
 });
 
-socket.on('userAnwsered', function(userName, userId, answer, correct) {
+socket.on('userAnwsered', function(userName, userId, anwserSet) {
     var column;
     // $("#1").append("userName = " + userName + "anwser = " + answer + "correct = " + correct);
     $("#userStatusTableBody tr").each(function() {
         if($(this).attr("id") === userId) {
             column = $(this).find(".anwser");
-            column.html(answer);
-            if(correct) {
+            column.html(anwserSet.answer);
+            if(anwserSet.correct) {
                 column.css("color", "#00FF00");
             } else {
                 column.css("color", "#FF0000");

@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, sloppy: true  */
-/*globals $: false, jConfirm: false, jAlert: false , io : false, window: false, createQForm : false */
+/*globals $: false, jConfirm: false, jAlert: false , io : false, window: false, createQForm : false, questionsAnwsers : true */
 /*COMETY*/
 var socket = io.connect(window.location), questionSet_id, egzamPassed, egzamFailed, SET;
 
@@ -9,12 +9,12 @@ $(document).ready(function() {
     // alert(userName + "," + userId);
 });
 /*Wysyłanie odpowiedzi*/
-$(document).on("click", "#giveAnswer", function(anwserSet) {
-    var userId = $("#userId").text(), userName = $("#userName").text();
-    if(anwserSet !== undefined) {
+$(document).on("click", "#giveAnswer", function() {
+    var userId = $("#userId").text(), userName = $("#userName").text(), currNum = parseInt($("#currNum").text());
+    if(questionsAnwsers[currNum] !== undefined) {
         jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
             if(r === true) {
-                socket.emit('answerQuestion', userId, userName, anwserSet);
+                socket.emit('answerQuestion', userId, userName, questionsAnwsers[currNum]);
             } else {
                 jAlert('I co myślisz że poprawisz odpowiedź?', 'Haha');
             }
@@ -54,10 +54,23 @@ socket.on('timeUpdate', function(time) {
     $("#zegarek").html("pozostało czasu: " + time);
 });
 /*Koniec pytania */
-socket.on('endQuestion', function() {
-    $("#zegarek").html("KONIEC!!!");
+socket.on('endQuestion', function(qID) {
+    var i, qAnwsered = false;
+    //   $("#zegarek").html("KONIEC!!!");
     $("#giveAnswer").hide();
-    $("#problem").show();
+    // $("#problem").show();
+    for( i = 0; i < questionsAnwsers.length; i += 1) {
+        if(questionsAnwsers[i].qID === qID) {
+            qAnwsered = true;
+        }
+    }
+
+    if(qAnwsered === false) {
+        questionsAnwsers.push({
+            qID : qID,
+            answer : "X"
+        });
+    }
 });
 /*Wyniki */
 socket.on('result', function(userId, result) {

@@ -99,17 +99,24 @@ io.sockets.on('connection', function(socket) {
         socket.broadcast.emit('userLoggedIn', userName, userId);
     });
 
-    socket.on('answerQuestion', function(userId, userName, questionId, answer) {
+    socket.on('answerQuestion', function(userId, userName, anwserSet) {
         var correct, i = 0;
-        questionProvider.getQuestion(questionId, function(error, question) {
-            if(question.correct === answer) {
+
+        console.log(anwserSet.qID + "  " + anwserSet.answer);
+        questionProvider.getQuestion(anwserSet.qID, function(error, question) {
+            if(question.correct === anwserSet.answer) {
+                console.log("prawda");
                 correct = true;
-                socket.broadcast.emit('endQuestion');
-                clearInterval(interval);
+                socket.broadcast.emit('endQuestion', anwserSet.qID);
+                // clearInterval(interval);
+                anwserSet.correct = true;
             } else {
+                console.log("nie");
                 correct = false;
+                anwserSet.correct = false;
             }
-            socket.broadcast.emit('userAnwsered', userName, userId, answer, correct);
+            console.log(anwserSet);
+            socket.broadcast.emit('userAnwsered', userName, userId, anwserSet);
         });
     });
     socket.on('egzamResult', function(userId, result) {
