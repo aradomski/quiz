@@ -1,6 +1,8 @@
 /*jslint browser: true, devel: true, sloppy: true */
 /*globals $: false, jConfirm: false, jAlert: false , dataTable: false, io : false */
 
+var iloscPytan;
+
 //przejście do panelu admina
 $(document).on("click", "#goToAdmin", function() {
     $.ajax({
@@ -108,7 +110,7 @@ socket.on('userAnwsered', function(userName, userId, anwserSet) {
         if($(this).attr("id") === userId) {
             column = $(this).find(".anwser");
             oldHmtl = column.html();
-            alert(anwserSet.qNum + anwserSet.answer);
+            // alert(anwserSet.qNum + anwserSet.answer);
             if(anwserSet.correct) {
                 //      column.css("color", "#00FF00");
                 nowy = "<b style='color:#00FF00' > " + anwserSet.qNum + ":" + anwserSet.answer + "</b>";
@@ -116,9 +118,10 @@ socket.on('userAnwsered', function(userName, userId, anwserSet) {
                 // column.css("color", "#FF0000");
                 nowy = "<b style='color:#FF0000' > " + anwserSet.qNum + ":" + anwserSet.answer + "</b>";
             }
-            alert(oldHmtl);
+            // alert(oldHmtl);
             oldHmtl += nowy;
             column.html(oldHmtl);
+            iloscPytan = anwserSet.ilosc;
         }
     });
 });
@@ -138,9 +141,18 @@ socket.on('userLoggedIn', function(userName, userId) {
 
 $(document).on("click", "#sendResults", function() {
     $("#userStatusTableBody tr").each(function() {
-        var userId = $(this).attr("id");
-        var result = $(this).children().last().css("color");
-        if(result === "rgb(0, 255, 0)") {
+        var userId = $(this).attr("id"), result = $(this).children().last(), poprawne = 0;
+        // alert("result =" + result.text());
+
+        result.children().each(function() {
+            // alert($(this).text());
+            if($(this).css("color") == "rgb(0, 255, 0)") {
+                poprawne += 1;
+            }
+        });
+        // alert(poprawne + "/ " + iloscPytan);
+        // .css("color");
+        if(poprawne > (iloscPytan / 2)) {
             socket.emit('egzamResult', userId, true);
         } else {
             socket.emit('egzamResult', userId, false);

@@ -17,7 +17,8 @@ $(document).on("click", "#answerBlock li", function() {
         questionsAnwsers.push({
             qID : qID,
             answer : answer,
-            qNum : currNum
+            qNum : currNum,
+            ilosc : SET.set.length
         });
         // $("#1").text("");
         // var txt = ""
