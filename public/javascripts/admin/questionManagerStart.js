@@ -12,7 +12,7 @@ $(function() {
 });
 //Dodawanie pytania
 $(document).on("click", "#addQuestionButton", function(e) {
-    var question = $("#questionForm input[name='question']").val(), a = $("#questionForm input[name='a']").val(), b = $("#questionForm input[name='b']").val(), c = $("#questionForm input[name='c']").val(), d = $("#questionForm input[name='d']").val(), correct = $("#questionForm select[name='correct']").val(), set = $("#questionForm select[name='set']").val(), name = $("select[name='set'] option:selected").text();
+    var question = $("#questionForm textarea[name='question']").val(), a = $("#questionForm textarea[name='a']").val(), b = $("#questionForm textarea[name='b']").val(), c = $("#questionForm textarea[name='c']").val(), d = $("#questionForm textarea[name='d']").val(), correct = $("#questionForm select[name='correct']").val(), set = $("#questionForm select[name='set']").val(), name = $("select[name='set'] option:selected").text();
     // alert(set);
     if(question === "" || a === "" || b === "" || c === "" || d === "" || correct === "" || set === "") {
         jAlert('<img src="images/emptyfield.jpg" width="500" height="310" alt="Empty field"/><br> Brak hasła.', 'U r doing it wrong!');

@@ -20,14 +20,7 @@ $(document).on("click", "#answerBlock li", function() {
             qNum : currNum,
             ilosc : SET.set.length
         });
-        // $("#1").text("");
-        // var txt = ""
-        // for( i = 0; i < questionsAnwsers.length; i += 1) {
-        // txt += questionsAnwsers[i].qID + "  " + questionsAnwsers[i].answer;
-        // }
-        // $("#1").text(txt);
     }
-
     //odznaczanie
     else {
         qID = $("#answerBlock").attr("name");
@@ -62,7 +55,9 @@ createQForm = function(question, currNum, lenght) {
         }
     }
     if(qAnwsered !== true) {
-        root.append("  <button id='giveAnswer' >Wyślij</button>");
+        root.append("  <button id='giveAnswer' >Wyślij</button> <br />");
+    } else {
+        root.append("To pytanie nie jest już dostępne!<br />");
     }
     root.append("<button id='prev'>Poprzednie </button>");
 
@@ -134,7 +129,7 @@ $(document).on("click", "#logout", function() {
         success : function(html) {
             //location.hash = 'foo';
             $('#loginStatus').remove();
-            $('#leftMenu').append("<section id='loginStatus'> <b>Login:</b><form><input id='loginUserName' type='text' name='userName'> <br><b>Haslo:</b><input id='loginPass' type='password' name='pass'><button id='loginButton'>Zaloguj</button></form></section>");
+            $('#leftMenu').append("<section id='loginStatus'> <b>Login:</b><form><input id='loginUserName' type='text' name='userName'> <br><b>Haslo:</b><br /><input id='loginPass' type='password' name='pass'><button id='loginButton'>Zaloguj</button></form></section>");
         },
         error : function() {
             //    $('#loginStatus').text('error');

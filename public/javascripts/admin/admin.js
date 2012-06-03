@@ -142,23 +142,20 @@ socket.on('userLoggedIn', function(userName, userId) {
 $(document).on("click", "#sendResults", function() {
     $("#userStatusTableBody tr").each(function() {
         var userId = $(this).attr("id"), result = $(this).children().last(), poprawne = 0;
-        // alert("result =" + result.text());
 
         result.children().each(function() {
-            // alert($(this).text());
+
             if($(this).css("color") == "rgb(0, 255, 0)") {
                 poprawne += 1;
             }
         });
-        // alert(poprawne + "/ " + iloscPytan);
-        // .css("color");
         if(poprawne > (iloscPytan / 2)) {
             socket.emit('egzamResult', userId, true);
         } else {
             socket.emit('egzamResult', userId, false);
         }
 
-        // alert(userId + "," + result);
-        //socket.emit('startQuestion', id, $("#time").val());
     });
+    // Numery urząd celny
+    //58 785 47 86 || 785 47 84
 });

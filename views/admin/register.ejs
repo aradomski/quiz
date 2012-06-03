@@ -2,6 +2,12 @@
 <% if(myParams.error === true) {%>
 	Błąd rejestracji<br/>
 <% } %>
+<% if(myParams.exist === true) {%>
+	<img src="/images/usernametaken.jpg" width="150" height="150" alt="username taken" style="float: right; margin-top: -15px;" />
+<% } %>
+<% if(myParams.error === true) {%>
+	<img src="/images/usererror.jpg" width="221" height="166" alt="user error" />
+<% } %>
 
 <form id="registerForm">
     <b>Login:</b>
@@ -10,18 +16,12 @@
     <b>Haslo:</b>
     <input id="pass" type="password" name="pass" size="15">
     <b>Powtórz:</b>
-    <input id="pass2" type="password" name="pass2" size="15">
-    <select id="group">
+    <input id="pass2" type="password" name="pass2" size="15"><br />
+    Należy do grupy: <select id="group">
     	<option value="1">1</option>
     	<option value="2">2</option>
     	<option value="3">3</option>
     	<option value="4">4</option>
-    </select>
+    </select> <br />
     <button id="registerButton">Zarejestruj</button>
 </form>
-<% if(myParams.exist === true) {%>
-	<img src="/images/username69.jpg" width="234" height="350" alt="username taken" />
-<% } %>
-<% if(myParams.error === true) {%>
-	<img src="/images/usererror.jpg" width="221" height="166" alt="user error" />
-<% } %>

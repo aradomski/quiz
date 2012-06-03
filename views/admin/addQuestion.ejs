@@ -1,23 +1,26 @@
 <% if(myParams.error === true) {%>
 	Dodawania pytania<br/>
 <% } %>
-<from id="questionForm">Pytanie
-    <input type="text" name="question">A:
-    <input type="text" name="a">B:
-    <input type="text" name="b">C:
-    <input type="text" name="c">D:
-    <input type="text" name="d">Prawidłowa
+<from id="questionForm" style="text-align: left">
+Pytanie:<textarea rows="4" cols="70"  name="question"> </textarea><br />
+  A:  <textarea name="a" rows="2" cols="70"></textarea><br />
+  B:  <textarea name="b" rows="2" cols="70"></textarea><br />
+  C:  <textarea name="c" rows="2" cols="70"></textarea><br />
+  D: <textarea name="d" rows="2" cols="70"></textarea><br />
+  Prawidłowa
     <select name="correct">
         <option value='A'>A</option>
         <option value='B'>B</option>
         <option value='C'>C</option>
         <option value='D'>D</option>
-    </select>Należy do zestawu:
+    </select>
+    <br />
+    Należy do zestawu:
     <select name="set">
     <% myParams.qSet.forEach( function(set) { %>
      <option value='<%= set._id %>'><%= set.name %></option>
     <% }) %>
     </select>
-    
+    <br />
     <input type="submit" class="a" id="addQuestionButton" value="Add question">
 </form>

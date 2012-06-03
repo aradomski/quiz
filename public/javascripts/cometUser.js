@@ -11,10 +11,14 @@ $(document).ready(function() {
 /*Wysyłanie odpowiedzi*/
 $(document).on("click", "#giveAnswer", function() {
     var userId = $("#userId").text(), userName = $("#userName").text(), currNum = parseInt($("#currNum").text());
+
+    // alert(questionsAnwsers[currNum] + "  " + userName + "  " + currNum + "  " + userId);
+
     if(questionsAnwsers[currNum] !== undefined) {
         jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
             if(r === true) {
                 socket.emit('answerQuestion', userId, userName, questionsAnwsers[currNum]);
+                $("#giveAnswer").hide();
             } else {
                 jAlert('I co myślisz że poprawisz odpowiedź?', 'Haha');
             }

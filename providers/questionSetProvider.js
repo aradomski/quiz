@@ -1,4 +1,6 @@
-/*globals QuestionSetProvider: true, console : false*/
+/*jslin node: true*/
+/*globals QuestionSetProvider: true, console : false , MONGO_NODE_DRIVER_HOST: false*/
+
 var Db = require('mongodb').Db, Connection = require('mongodb').Connection, Server = require('mongodb').Server, BSON = require('mongodb').BSON, ObjectID = require('mongodb').ObjectID;
 QuestionSetProvider = function() {
     var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
