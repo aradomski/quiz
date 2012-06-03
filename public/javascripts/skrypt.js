@@ -16,7 +16,7 @@ $(document).on("click", "#answerBlock li", function() {
         findAndRemove(questionsAnwsers, qID);
         questionsAnwsers.push({
             qID : qID,
-            answer : answer,
+            // answer : answer,
             qNum : currNum,
             ilosc : SET.set.length
         });
@@ -44,17 +44,16 @@ createQForm = function(question, currNum, lenght) {
     // alert("asda");
     lenght -= 1;
     var questionText = question.question, a = question.a, b = question.b, c = question.c, d = question.d, id = question._id, anwsered = question.anwsered, root = $("#quiz"), i, qAnwsered;
-
-    // alert(questionText + " " + a + b + c + d + " id = " + id);
-    root.html("");
-    root.html("<p>" + questionText + "</p>" + "<ul id='answerBlock' name='" + id + "'>" + "<li id='answerA' class='answer'> <input type='radio' name='answer' value='A' class='radioAnswer'><h1 class='answerH1'>A</h1><span class='answerSpan'>" + a + "</span></li>" + "<li id='answerB' class='answer'> <input type='radio' name='answer' value='B' class='radioAnswer'><h1 class='answerH1'>B</h1><span class='answerSpan'>" + b + "</span></li>" + "<li id='answerC' class='answer'> <input type='radio' name='answer' value='C' class='radioAnswer'><h1 class='answerH1'>C</h1><span class='answerSpan'>" + c + "</span></li>" + "<li id='answerD' class='answer'> <input type='radio' name='answer' value='D' class='radioAnswer'><h1 class='answerH1'>D</h1><span class='answerSpan'>" + d + "</span></li>" + "</ul>");
-
     for( i = 0; i < questionsAnwsers.length; i += 1) {
-        if(questionsAnwsers[i].qID === id) {
+        if(questionsAnwsers[i].qID === id && questionsAnwsers[i].answer !== undefined) {
             qAnwsered = true;
         }
     }
+    // alert(questionText + " " + a + b + c + d + " id = " + id);
+    root.html("");
+
     if(qAnwsered !== true) {
+        root.html("<p>" + questionText + "</p>" + "<ul id='answerBlock' name='" + id + "'>" + "<li id='answerA' class='answer'> <input type='radio' name='answer' value='A' class='radioAnswer'><h1 class='answerH1'>A</h1><span class='answerSpan'>" + a + "</span></li>" + "<li id='answerB' class='answer'> <input type='radio' name='answer' value='B' class='radioAnswer'><h1 class='answerH1'>B</h1><span class='answerSpan'>" + b + "</span></li>" + "<li id='answerC' class='answer'> <input type='radio' name='answer' value='C' class='radioAnswer'><h1 class='answerH1'>C</h1><span class='answerSpan'>" + c + "</span></li>" + "<li id='answerD' class='answer'> <input type='radio' name='answer' value='D' class='radioAnswer'><h1 class='answerH1'>D</h1><span class='answerSpan'>" + d + "</span></li>" + "</ul>");
         root.append("  <button id='giveAnswer' >Wyślij</button> <br />");
     } else {
         root.append("To pytanie nie jest już dostępne!<br />");
@@ -129,7 +128,7 @@ $(document).on("click", "#logout", function() {
         success : function(html) {
             //location.hash = 'foo';
             $('#loginStatus').remove();
-            $('#leftMenu').append("<section id='loginStatus'> <b>Login:</b><form><input id='loginUserName' type='text' name='userName'> <br><b>Haslo:</b><br /><input id='loginPass' type='password' name='pass'><button id='loginButton'>Zaloguj</button></form></section>");
+            $('#leftMenu').append("<section id='loginStatus'> <b>Login:</b><form><input id='loginUserName' type='text' name='userName'> <br><b>Haslo:</b><br /><input id='loginPass' type='password' name='pass'><br /><button id='loginButton'>Zaloguj</button></form></section>");
         },
         error : function() {
             //    $('#loginStatus').text('error');

@@ -10,13 +10,16 @@ $(document).ready(function() {
 });
 /*Wysyłanie odpowiedzi*/
 $(document).on("click", "#giveAnswer", function() {
-    var userId = $("#userId").text(), userName = $("#userName").text(), currNum = parseInt($("#currNum").text());
+    var userId = $("#userId").text(), userName = $("#userName").text(), currNum = parseInt($("#currNum").text()), answer;
 
     // alert(questionsAnwsers[currNum] + "  " + userName + "  " + currNum + "  " + userId);
 
     if(questionsAnwsers[currNum] !== undefined) {
         jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
             if(r === true) {
+                answer = $(".answerChecked").find(".answerH1").text();
+                // alert(answer);
+                questionsAnwsers[currNum].answer = answer;
                 socket.emit('answerQuestion', userId, userName, questionsAnwsers[currNum]);
                 $("#giveAnswer").hide();
             } else {

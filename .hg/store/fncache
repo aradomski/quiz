@@ -1125,3 +1125,4 @@ data/public/javascripts/admin/questionSetManagerStart.js.i
 data/views/admin/addQuestionSet.ejs.i
 data/views/admin/questionSetManager.ejs.i
 data/views/admin/questionsSetTable.ejs.i
+data/public/images/notPassLogo.jpg.i
