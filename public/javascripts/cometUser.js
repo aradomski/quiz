@@ -10,14 +10,26 @@ $(document).ready(function() {
 });
 /*Wysyłanie odpowiedzi*/
 $(document).on("click", "#giveAnswer", function() {
-    var userId = $("#userId").text(), userName = $("#userName").text(), currNum = parseInt($("#currNum").text()), answer;
+    var userId = $("#userId").text(), userName = $("#userName").text(), currNum = parseInt($("#currNum").text()), answer, isAnswered, qID = $("#answerBlock").attr("name"), i, toSend = {};
 
     // alert(questionsAnwsers[currNum] + "  " + userName + "  " + currNum + "  " + userId);
 
-    if(questionsAnwsers[currNum] !== undefined) {
+    for( i = 0; i < questionsAnwsers.lenght; i += 1) {
+        if(questionsAnwsers[i].qID === qID) {
+            isAnswered = true;
+        }
+    }
+    answer = $(".answerChecked").find(".answerH1").text();
+    if(answer === "A" || answer === "B" || answer === "C" || answer === "D") {
         jConfirm('Wysłać odpowiedź?', 'I tak nie zdasz....', function(r) {
             if(r === true) {
-                answer = $(".answerChecked").find(".answerH1").text();
+                toSend = {
+                    qID : qID,
+                    answer : answer,
+                    qNum : currNum,
+                    ilosc : SET.set.length
+                };
+
                 // alert(answer);
                 questionsAnwsers[currNum].answer = answer;
                 socket.emit('answerQuestion', userId, userName, questionsAnwsers[currNum]);
